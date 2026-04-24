@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.odiscom.com"),
@@ -12,12 +13,13 @@ export const metadata: Metadata = {
     "Odiscom provides telecom engineering, fiber, wireless, tower, and construction support for real-world infrastructure deployment across Texas and nationwide.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode; }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   );
