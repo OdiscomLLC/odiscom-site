@@ -133,15 +133,25 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-white/65">
-            © {new Date().getFullYear()} Odiscom. All rights reserved.
-          </p>
+     <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
 
-          <p className="text-sm text-white/50">
-            Built for telecom infrastructure delivery
-          </p>
-        </div>
+  <p className="text-sm text-white/65">
+    © {new Date().getFullYear()} Odiscom. All rights reserved.
+  </p>
+
+  <div className="flex gap-6 text-sm text-white/70">
+    <Link href="/privacy" className="hover:text-white">
+      Privacy Policy
+    </Link>
+    <Link href="/terms" className="hover:text-white">
+      Terms of Use
+    </Link>
+  </div>
+
+  <p className="text-sm text-white/50">
+    Built for telecom infrastructure delivery
+  </p>
+</div>	
       </div>
     </footer>
   )
