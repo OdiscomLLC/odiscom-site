@@ -102,8 +102,8 @@ export default function TermsPage() {
           <h2 className="font-semibold text-lg">15. Contact</h2>
           <p>
             Odiscom LLC<br />
-            Arlington, Texas<br />
-            Email: jacob@odiscom.com<br />
+            League City, Texas<br />
+            Email: admin@odiscom.com<br />
             https://odiscom.com
           </p>
         </section>
