@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import CloudPhotoUpload from './CloudPhotoUpload';
 
 export const metadata: Metadata = {
   title: 'Scott AFB Site Walk | ODISCOM',
@@ -9,4 +10,4 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, maximumScale: 1, themeColor: '#0b1f3a' };
 
-export default function Layout({children}:{children:React.ReactNode}){ return children; }
+export default function Layout({children}:{children:React.ReactNode}){ return <>{children}<CloudPhotoUpload/></>; }
