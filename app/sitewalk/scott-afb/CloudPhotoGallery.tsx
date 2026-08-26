@@ -5,7 +5,7 @@ export default function CloudPhotoGallery(){
  const [open,setOpen]=useState(false),[loading,setLoading]=useState(false),[photos,setPhotos]=useState<Photo[]>([]),[error,setError]=useState('');
  async function load(){setOpen(true);setLoading(true);setError('');try{const r=await fetch('/api/sitewalk/scott-afb/photos',{cache:'no-store'});const j=await r.json();if(!r.ok)throw new Error(j.error||'Could not retrieve photos');setPhotos(j.photos||[])}catch(e){setError(e instanceof Error?e.message:'Could not retrieve photos')}finally{setLoading(false)}}
  return <>
-  <button onClick={load} style={{position:'fixed',left:12,bottom:12,zIndex:9998,border:0,borderRadius:12,padding:'12px 16px',background:'#0b1f3a',color:'#fff',fontWeight:700,fontSize:15,boxShadow:'0 4px 18px #0004'}}>📷 Cloud Photos</button>
+  <button onClick={load} style={{position:'fixed',left:12,bottom:68,zIndex:9998,border:0,borderRadius:12,padding:'12px 16px',background:'#0b1f3a',color:'#fff',fontWeight:700,fontSize:15,boxShadow:'0 4px 18px #0004'}}>📷 Cloud Photos</button>
   {open&&<div style={{position:'fixed',inset:0,zIndex:10000,background:'#0009',padding:12,overflow:'auto'}} onClick={()=>setOpen(false)}>
    <div onClick={e=>e.stopPropagation()} style={{maxWidth:900,margin:'30px auto',background:'#f7f9fc',borderRadius:16,padding:16,color:'#10213a'}}>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:12,marginBottom:14}}><div><b style={{fontSize:22}}>📷 Scott AFB Cloud Photos</b><div style={{fontSize:13,opacity:.7}}>FA440726QJC05 · private Odiscom storage</div></div><button onClick={()=>setOpen(false)} style={{fontSize:24,border:0,background:'transparent'}}>✕</button></div>
