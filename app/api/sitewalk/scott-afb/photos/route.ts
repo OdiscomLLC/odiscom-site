@@ -11,6 +11,19 @@ const ALLOWED=new Set(['image/jpeg','image/png','image/webp','image/heic','image
 function clean(v:string){return v.replace(/[^a-zA-Z0-9._-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80)||'unknown'}
 function client(){const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)return null;return {url,supabase:createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}})}}
 
+export async function GET(){
+ const c=client();if(!c)return NextResponse.json({error:'Photo storage is not configured.'},{status:503});
+ try{
+  const {data,error}=await c.supabase.from('sitewalk_photos').select('id,attendee,building,item_id,original_name,storage_path,mime_type,size_bytes,captured_at,uploaded_at').eq('solicitation',SOLICITATION).order('uploaded_at',{ascending:false}).limit(250);
+  if(error)throw error;
+  const photos=await Promise.all((data||[]).map(async row=>{
+   const {data:signed,error:signedError}=await c.supabase.storage.from(BUCKET).createSignedUrl(row.storage_path,3600);
+   return {...row,url:signedError?null:signed?.signedUrl||null};
+  }));
+  return NextResponse.json({ok:true,count:photos.length,photos});
+ }catch(e){console.error('List Scott AFB photos failed',e);return NextResponse.json({error:e instanceof Error?e.message:'Could not retrieve photos.'},{status:500})}
+}
+
 // Small JSON request only. Returns a short-lived signed upload token; image bytes never pass through Vercel.
 export async function POST(req:NextRequest){
  const c=client();if(!c)return NextResponse.json({error:'Photo storage is not configured.'},{status:503});
