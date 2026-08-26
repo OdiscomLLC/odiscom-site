@@ -1,0 +1,9 @@
+{
+  "name": "Scott AFB Site Walk",
+  "short_name": "Scott SiteWalk",
+  "start_url": "/sitewalk/scott-afb",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#0b1f3a",
+  "description": "ODISCOM field checklist for FA440726QJC05 Scott AFB Unaccompanied Housing Wi-Fi site walk."
+}
