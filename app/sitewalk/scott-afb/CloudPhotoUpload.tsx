@@ -9,8 +9,8 @@ export default function CloudPhotoUpload(){
   try{
    const auth=await fetch('/api/sitewalk/scott-afb/photos',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:file.name||'photo.jpg',mime,size:file.size,itemId,attendee,building,capturedAt})});const a=await auth.json().catch(()=>({}));if(!auth.ok)throw new Error(a.error||`Authorization failed (${auth.status})`);
    setMsg('Uploading photo directly to cloud…');
-   const storageUrl=`${String(a.supabaseUrl).replace(/\/$/,'')}/storage/v1/upload/sign/scott-afb-sitewalk/${a.path}?token=${encodeURIComponent(a.token)}`;
-   const upload=await fetch(storageUrl,{method:'PUT',headers:{'content-type':mime,'x-upsert':'false'},body:file});if(!upload.ok){const t=await upload.text().catch(()=>'');throw new Error(`Cloud upload failed (${upload.status})${t?`: ${t.slice(0,120)}`:''}`)}
+   const storageUrl=`${String(a.supabaseUrl).replace(/\/$/,'')}/storage/v1/object/upload/sign/scott-afb-sitewalk/${a.path}?token=${encodeURIComponent(a.token)}`;
+   const upload=await fetch(storageUrl,{method:'POST',headers:{'content-type':mime,'x-upsert':'false'},body:file});if(!upload.ok){const t=await upload.text().catch(()=>'');throw new Error(`Cloud upload failed (${upload.status})${t?`: ${t.slice(0,120)}`:''}`)}
    setMsg('Saving photo details…');
    const meta=await fetch('/api/sitewalk/scott-afb/photos',{method:'PUT',headers:{'content-type':'application/json'},body:JSON.stringify({path:a.path,attendee,building,itemId,originalName:file.name||'photo.jpg',mime,size:file.size,capturedAt})});const m=await meta.json().catch(()=>({}));if(!meta.ok)throw new Error(m.error||`Photo uploaded but metadata failed (${meta.status})`);
    setCount(n=>n+1);setMsg('✓ Photo saved to Odiscom cloud');
