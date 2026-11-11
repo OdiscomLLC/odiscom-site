@@ -9,7 +9,15 @@ type ContactPayload = {
   projectDetails?: string;
   contactPerson?: string;
   website?: string;
+  phone?: string;
+  location?: string;
+  service?: string;
+  timeline?: string;
 };
+
+function clean(value: unknown, maxLength = 12000) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -35,14 +43,26 @@ export async function POST(req: Request) {
       );
     }
 
-    const body = (await req.json()) as ContactPayload;
+    let body: ContactPayload;
+    try {
+      const parsed = await req.json();
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("Invalid payload");
+      body = parsed as ContactPayload;
+    } catch {
+      return NextResponse.json({ error: "Please submit a valid inquiry." }, { status: 400 });
+    }
 
-    const name = body.name?.trim() ?? "";
-    const email = body.email?.trim() ?? "";
-    const company = body.company?.trim() ?? "";
-    const contactPerson = body.contactPerson?.trim() ?? "General Team";
-    const projectDetails = body.details?.trim() ?? body.projectDetails?.trim() ?? "";
-    const website = body.website?.trim() ?? "";
+    const name = clean(body.name, 200);
+    const email = clean(body.email, 320);
+    const company = clean(body.company, 300);
+    const contactPerson = clean(body.contactPerson, 100) || "Bret";
+    const projectDetails = clean(body.details) || clean(body.projectDetails);
+    const website = clean(body.website, 500);
+
+    const phone = clean(body.phone, 80);
+    const location = clean(body.location, 200);
+    const service = clean(body.service, 200);
+    const timeline = clean(body.timeline, 200);
 
     if (website) {
       return NextResponse.json({ success: true });
@@ -66,6 +86,7 @@ export async function POST(req: Request) {
     const fallbackTo = process.env.CONTACT_TO || "owners@odiscom.com";
 
     const contactMap: Record<string, string> = {
+      Bret: process.env.CONTACT_TO_BRET || "bret.bachert@odiscom.com",
       Jeff: process.env.CONTACT_TO_JEFF || fallbackTo,
       Jacob: process.env.CONTACT_TO_JACOB || fallbackTo,
       Royce: process.env.CONTACT_TO_ROYCE || fallbackTo,
@@ -73,7 +94,7 @@ export async function POST(req: Request) {
       "General Team": fallbackTo,
     };
 
-    const contactTo = contactMap[contactPerson] || fallbackTo;
+    const contactTo = Object.prototype.hasOwnProperty.call(contactMap, contactPerson) ? contactMap[contactPerson] : fallbackTo;
     const from = process.env.CONTACT_FROM || "Odiscom Website <admin@odiscom.com>";
     const subject = `New Odiscom Project Inquiry from ${name}`;
 
@@ -81,6 +102,10 @@ export async function POST(req: Request) {
       `Name: ${name}`,
       `Email: ${email}`,
       `Company: ${company || "Not provided"}`,
+      `Phone: ${phone || "Not provided"}`,
+      `Project Location: ${location || "Not provided"}`,
+      `Service: ${service || "Not specified"}`,
+      `Target Schedule: ${timeline || "Not provided"}`,
       `Requested Contact: ${contactPerson}`,
       `Deliver To: ${contactTo}`,
       "",
@@ -94,6 +119,10 @@ export async function POST(req: Request) {
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Company:</strong> ${escapeHtml(company || "Not provided")}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
+        <p><strong>Project Location:</strong> ${escapeHtml(location || "Not provided")}</p>
+        <p><strong>Service:</strong> ${escapeHtml(service || "Not specified")}</p>
+        <p><strong>Target Schedule:</strong> ${escapeHtml(timeline || "Not provided")}</p>
         <p><strong>Requested Contact:</strong> ${escapeHtml(contactPerson)}</p>
         <p><strong>Deliver To:</strong> ${escapeHtml(contactTo)}</p>
         <p><strong>Project Details:</strong></p>
@@ -150,7 +179,7 @@ export async function POST(req: Request) {
       console.error("Resend confirmation send error:", confirmationResult.error);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, confirmationSent: !confirmationResult.error });
   } catch (error) {
     console.error("Contact form error:", error);
     return NextResponse.json(

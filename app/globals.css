@@ -188,3 +188,13 @@ body {
     0 0 0 1px rgba(31, 138, 132, 0.10);
   border-color: rgba(31, 138, 132, 0.22);
 }
+/* Keyboard and reduced-motion support across service and inquiry flows. */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid #1f8a84;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .logo-marquee, .logo-marquee-reverse { animation: none; }
+  .logo-card { transition: none; }
+}

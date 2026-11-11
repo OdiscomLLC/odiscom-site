@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import BottomCta from "@/components/BottomCta";
+import { serviceLinks } from "@/lib/service-navigation";
+import { services } from "@/lib/services";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const trustedLogos = [
   { name: "AT&T", logo: "/logos/att.png", size: "normal" },
@@ -20,32 +25,7 @@ const trustedLogos = [
   { name: "Vertical Bridge", logo: "/logos/verticalbridge.png", size: "xlarge" },
 ] as const;
 
-const coreServices = [
-  {
-    name: "Fiber",
-    href: "/services/fiber",
-    description:
-      "OSP engineering, route development, fielding, and construction-ready documentation for fiber deployment programs.",
-  },
-  {
-    name: "Wireless",
-    href: "/services/wireless",
-    description:
-      "Wireless site support, upgrade coordination, and execution-focused delivery for carrier infrastructure programs.",
-  },
-  {
-    name: "Towers",
-    href: "/services/towers",
-    description:
-      "Tower modifications, vertical infrastructure support, and field-ready coordination built for active projects.",
-  },
-  {
-    name: "Construction",
-    href: "/services/construction",
-    description:
-      "Construction-minded planning, documentation, and delivery support aligned with real field conditions.",
-  },
-];
+const coreServices = serviceLinks.map(item => ({ name: item.name, href: `/services/${item.slug}`, description: services[item.slug].description }));
 
 function getLogoSizing(size?: "small" | "normal" | "large" | "xlarge") {
   switch (size) {
@@ -98,17 +78,17 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl items-center px-6 lg:px-8">
           <div className="max-w-3xl text-white">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
-              Fiber • Wireless • Towers • Construction
+              Site Acquisition • Engineering • Construction
             </p>
 
-            <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
-              Telecom engineering built for real-world deployment
+            <h1 className="text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl">
+              From site acquisition to engineering and construction.
             </h1>
 
             <p className="mt-7 max-w-2xl text-xl leading-9 text-white/90">
-              Odiscom supports fiber, tower, and telecommunications
-              infrastructure programs with practical design, coordinated
-              execution, and construction-ready documentation.
+              Fiber networks, wireless sites and the facilities that connect them.
+              Odiscom brings together site acquisition, multidisciplinary A&E
+              and construction capabilities to move infrastructure projects forward.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -141,24 +121,25 @@ export default function HomePage() {
             </p>
 
             <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-              Telecom support across fiber, wireless, tower, and construction
+              The services behind your next network build
             </h2>
 
             <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-              Explore Odiscom’s core service areas built to support active
-              infrastructure programs from planning through field execution.
+              Engage us for a defined drawing package, a site acquisition program,
+              engineering production support or construction delivery. A&E is
+              provided by Odiscom LLC; construction by Odiscom Construction LLC.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {coreServices.map((item) => (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {coreServices.map((item, index) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className="group rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#1f8a84]/30 hover:shadow-xl"
               >
                 <div className="inline-flex rounded-full bg-[#e8f6f5] px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#1f8a84]">
-                  {item.name}
+                  0{index + 1}
                 </div>
 
                 <h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900">
@@ -187,12 +168,13 @@ export default function HomePage() {
           </p>
 
           <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-            Real-world telecom project support
+            Fiber routes. Joint-use packages. Network facilities.
           </h2>
 
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-            See examples of how Odiscom supports fiber, wireless, tower, and
-            construction programs with practical, execution-focused delivery.
+            Explore our work with TDS, Zayo, Horrocks, Stratis, SQUAN and D4
+            Communications—from mainline and drop drawings to ILA facilities
+            and site acquisition.
           </p>
 
           <div className="mt-10">
@@ -281,15 +263,3 @@ export default function HomePage() {
     </main>
   );
 }
-<script type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Odiscom",
-  url: "https://www.odiscom.com",
-  logo: "https://www.odiscom.com/logo.png",
-  sameAs: [
-    "https://www.linkedin.com/company/odiscom"
-  ],
-})}
-</script>

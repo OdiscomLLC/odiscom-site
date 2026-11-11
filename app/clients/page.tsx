@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 import Image from "next/image"
 import Link from "next/link"
 import BottomCta from "@/components/BottomCta"
+import { projectExperience } from "@/lib/project-experience"
 
 const clients = [
   {
@@ -29,14 +30,14 @@ const clients = [
     logo: "/logos/zayo.png",
     category: "Fiber / Network Infrastructure",
     description:
-      "Support across fiber infrastructure environments requiring field-aware engineering and coordinated execution.",
+      "ILA facility engineering, site acquisition, property due diligence, construction drawings and permitting coordination within assigned scopes.",
   },
   {
     name: "TDS Telecommunications",
     logo: "/logos/tds.png",
     category: "Carrier / Telecom",
     description:
-      "Telecom support shaped around deployment realities, documentation needs, and infrastructure delivery workflows.",
+      "Fiber mainline and drop drawing packages, aerial joint-use applications, pole data and utility-review coordination.",
   },
   {
     name: "ADB-US",
@@ -50,7 +51,7 @@ const clients = [
     logo: "/logos/squan.png",
     category: "Construction / Delivery Partner",
     description:
-      "Support for telecom construction and field operations where practical coordination and execution readiness matter.",
+      "PE review of aerial and underground fiber plans, make-ready documentation, OTMR letters and drawing review responses.",
   },
   {
     name: "Harmoni Towers",
@@ -236,30 +237,11 @@ export default function ClientsPage() {
         </div>
       </section>
 
-      {/* RELATIONSHIP NOTE */}
-      <section className="bg-[#f7fbfb] py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1f8a84]">
-              Delivery mindset
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
-              Built to support active infrastructure programs
-            </h2>
-          </div>
-
-          <div className="space-y-5 text-lg leading-8 text-slate-600">
-            <p>
-              Odiscom works in project environments where progress depends on
-              practical communication, field-aware support, and documentation that
-              helps teams execute instead of creating delays.
-            </p>
-            <p>
-              Whether the client is a carrier, tower company, contractor, or
-              infrastructure partner, our role is centered on helping telecom work
-              move forward with clarity, coordination, and delivery discipline.
-            </p>
-          </div>
+      <section className="bg-[#f7fbfb] py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 className="text-3xl font-semibold">Fiber engineering and delivery partners</h2>
+          <p className="mt-4 max-w-3xl leading-8 text-slate-600">Our project experience includes direct clients and work through engineering firms and prime contractors. The project descriptions identify Odiscom’s actual scope and the program relationship.</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">{projectExperience.filter(project => ["Horrocks", "Stratis", "D4 Communications"].includes(project.client)).map(project => <article key={project.client} className="rounded-3xl border border-slate-200 bg-white p-7"><h3 className="text-2xl font-semibold">{project.client}</h3><p className="mt-3 text-sm font-medium text-[#166e68]">{project.location}</p><p className="mt-4 leading-7 text-slate-600">{project.summary}</p><Link href="/case-studies" className="mt-5 inline-block font-semibold text-[#166e68]">View project scope →</Link></article>)}</div>
         </div>
       </section>
 

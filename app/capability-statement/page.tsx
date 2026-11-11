@@ -4,36 +4,40 @@ import BottomCta from "@/components/BottomCta";
 
 export const metadata: Metadata = {
   title: "Capability Statement",
+  alternates: { canonical: "/capability-statement" },
   description:
     "Odiscom capability statement for government, carrier, and infrastructure opportunities across fiber, wireless, towers, and telecom project delivery.",
 };
 
 const coreCompetencies = [
-  "OSP / fiber route development and field-aware engineering support",
-  "Wireless infrastructure coordination and carrier program support",
-  "Tower upgrade, modification, and vertical infrastructure support",
-  "Construction-ready documentation and execution-focused delivery support",
-  "Permit support, utility coordination, and field verification workflows",
-  "Project coordination aligned with real deployment conditions",
+  "Fiber / OSP engineering: FTTH mainline and drops, aerial and underground route drawings",
+  "Joint use: pole data, loading and clearance reviews, make-ready and utility applications",
+  "Site acquisition: candidate searches, property coordination and due diligence",
+  "Fiber facilities: ILA, hut, POP and cabinet site engineering",
+  "Wireless A&E, tower and mount analysis, and foundation engineering",
+  "Civil and electrical drawings, grading, drainage, power and grounding",
+  "Permitting, specialist coordination and engineering production support",
+  "Construction-phase engineering, field changes, redlines and record drawings",
 ];
 
 const differentiators = [
   "Practical, execution-minded approach built around real field conditions",
-  "Support across fiber, wireless, tower, and telecom construction environments",
-  "Responsive coordination designed to help projects move with fewer delays",
+  "Engineering-led coordination across fiber routes, facility sites and wireless infrastructure",
+  "Defined scopes and repeatable drawing-production support for ongoing programs",
   "Documentation and delivery support focused on constructability and clarity",
   "Flexible support model for agencies, primes, contractors, and infrastructure partners",
 ];
 
 const companyData = [
-  ["Legal Name", "Odiscom LLC"],
+  ["A&E Company", "Odiscom LLC"],
+  ["Construction Company", "Odiscom Construction LLC"],
   ["Website", "www.odiscom.com"],
   ["Email", "owners@odiscom.com"],
   ["Phone", "(469) 531-1176"],
   ["Headquarters", "League City, Texas"],
-  ["Ownership", "51% woman-owned"],
+  ["A&E Ownership", "51% woman-owned"],
   ["Public-Sector Readiness", "Capability statement and onboarding materials available"],
-  ["Registrations", "UEI / CAGE / NAICS available upon request or to be added here"],
+  ["Registrations", "Texas Engineering Firm F-23951; additional procurement information available upon request"],
 ];
 
 export default function CapabilityStatementPage() {
@@ -51,9 +55,10 @@ export default function CapabilityStatementPage() {
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
             Odiscom supports government, carrier, contractor, and infrastructure
-            programs with practical telecom engineering, field-aware
-            coordination, and construction-ready delivery across fiber,
-            wireless, towers, and telecom infrastructure.
+            programs with fiber/OSP engineering, site acquisition, joint use, wireless A&E,
+            structural, civil and electrical design, permitting and construction-phase
+            technical support. Construction services are provided separately by
+            Odiscom Construction LLC.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -64,11 +69,12 @@ export default function CapabilityStatementPage() {
               Contact Odiscom
             </Link>
 
+            <a href="/Odiscom-Capability-Statement.pdf" className="rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-[#166e68]">Download Company Capabilities</a>
             <a
-              href="/Odiscom-Capability-Statement.pdf"
+              href="/Odiscom_Wireline_Fiber_Capability_Sheet.pdf"
               className="rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-[#1f8a84] transition hover:bg-[#f0f7f7]"
             >
-              Download PDF
+              Download Wireline & Fiber PDF
             </a>
           </div>
         </div>
@@ -119,7 +125,7 @@ export default function CapabilityStatementPage() {
               </p>
 
               <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-                Built around real deployment conditions, not abstract design
+                Engineering capacity for routes, sites and facilities
               </h2>
             </div>
 
@@ -168,7 +174,8 @@ export default function CapabilityStatementPage() {
             <p className="mt-4 leading-8 text-slate-600">
               Capability statement, onboarding materials, and procurement
               support can be tailored for public-sector, prime contractor, and
-              structured infrastructure opportunities.
+              structured infrastructure opportunities. A&E and construction scopes
+              identify the appropriate Odiscom contracting company.
             </p>
           </article>
         </div>
