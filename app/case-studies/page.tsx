@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ProjectGallery from "@/components/ProjectGallery";
+import { socialMetadata } from "@/lib/social-metadata";
 import BottomCta from "@/components/BottomCta";
 import { projectExperience } from "@/lib/project-experience";
 import { services } from "@/lib/services";
 
-export const metadata: Metadata = {
-  title: "Fiber, DAS & Telecom Project Experience",
-  description: "Odiscom project scopes with AmeriCloud, TDS, Zayo, Horrocks, Stratis, SQUAN and D4 Communications: DAS, OSP engineering, site acquisition and fiber facilities.",
-  alternates: { canonical: "/case-studies" },
-};
+export const metadata: Metadata = socialMetadata("Fiber, DAS & Telecom Project Experience", "Odiscom project scopes with AmeriCloud, TDS, Zayo, Horrocks, Stratis, SQUAN and D4 Communications, with actual drawing excerpts and deliverables.", "/case-studies", "projects");
 
 export default function ProjectExperiencePage() {
   return <main className="bg-white text-slate-900">
@@ -19,7 +17,7 @@ export default function ProjectExperiencePage() {
       <a href="/Odiscom_Wireline_Fiber_Capability_Sheet.pdf" className="mt-8 inline-block rounded-full bg-[#166e68] px-6 py-3 font-semibold text-white">Download wireline & fiber capabilities</a>
     </div></section>
     <section className="mx-auto grid max-w-7xl gap-8 px-6 py-16 lg:grid-cols-2 lg:px-8">
-      {projectExperience.map(project => <article key={project.client} className="flex flex-col rounded-3xl border border-slate-200 p-7 md:p-9">
+      {projectExperience.map(project => <article id={project.id} key={project.client} className="scroll-mt-28 flex flex-col rounded-3xl border border-slate-200 p-7 md:p-9">
         <p className="text-sm font-semibold uppercase tracking-wide text-[#166e68]">{project.category}</p>
         <h2 className="mt-4 text-3xl font-semibold">{project.client}</h2>
         <p className="mt-2 text-sm text-slate-500">{project.location}</p>
@@ -31,6 +29,7 @@ export default function ProjectExperiencePage() {
         <div className="mt-7 flex flex-wrap gap-2 border-t border-slate-200 pt-5">{project.services.map(slug => <Link key={slug} href={`/services/${slug}`} className="rounded-full bg-[#f0f7f7] px-4 py-2 text-sm font-medium text-[#166e68]">{services[slug].name}</Link>)}</div>
       </article>)}
     </section>
+    <ProjectGallery />
     <BottomCta title="Have a similar project or production need?" description="Send the scope and schedule to Bret. We’ll connect your project with the right Odiscom team." />
   </main>;
 }

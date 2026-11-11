@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ProjectGallery from "@/components/ProjectGallery";
+import { socialMetadata } from "@/lib/social-metadata";
 import BottomCta from "@/components/BottomCta";
 import { americloudProjects } from "@/lib/americloud-projects";
 
-export const metadata: Metadata = {
-  title: "AmeriCloud DAS & In-Building Wireless Projects",
-  description: "Odiscom A&E project experience through AmeriCloud: Fremont municipal DAS, Mercedes-Benz R&D, Washington State DOC headquarters and Miami Ericsson Radio Dot electrical engineering.",
-  alternates: { canonical: "/case-studies/americloud-das" },
-};
+export const metadata: Metadata = socialMetadata("AmeriCloud DAS & In-Building Wireless Projects", "Odiscom A&E through AmeriCloud: Fremont municipal DAS, Mercedes-Benz R&D, Washington State DOC headquarters and Miami Ericsson Radio Dot engineering.", "/case-studies/americloud-das", "das");
 
 export default function AmericloudDasPage() {
   return <main className="bg-white text-slate-900">
@@ -36,6 +34,7 @@ export default function AmericloudDasPage() {
       </div>
     </section>
     <section className="mx-auto max-w-7xl px-6 lg:px-8"><div className="rounded-3xl bg-[#f0f7f7] p-8 md:p-10"><h2 className="text-3xl font-semibold">From the RF design to the construction package.</h2><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">We help translate system requirements and field conditions into coordinated antenna, cabling, equipment, power and grounding documentation. Our engineering team works through venue and jurisdiction comments and keeps revisions aligned across disciplines.</p><div className="mt-6 flex flex-wrap gap-4"><Link href="/services/wireless" className="font-semibold text-[#166e68]">Wireless & DAS A&E →</Link><Link href="/services/civil-electrical" className="font-semibold text-[#166e68]">Civil & electrical engineering →</Link></div></div></section>
+    <ProjectGallery only="fremont-das" />
     <BottomCta title="Planning a DAS or in-building wireless project?" description="Send Bret the venue information, system scope, available RF design, required deliverables and target schedule." />
   </main>;
 }

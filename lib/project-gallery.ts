@@ -1,0 +1,28 @@
+export const projectGallery = [
+  {
+    id: "tds-helena",
+    image: "/images/projects/tds-helena-trench-detail.png",
+    width: 1410,
+    height: 1365,
+    alt: "Typical fiber trench section from Odiscom’s TDS Helena drawing package",
+    client: "TDS Telecommunications · Helena, Montana",
+    title: "Fiber drop permit documentation",
+    text: "An 11-sheet permit package includes five drop-plan sheets, installation and utility-crossing details, trench and restoration requirements, and traffic-control sheets.",
+    caption: "Selected trench-section excerpt from the October 2026 permit package. Shown as an example of project documentation.",
+    href: "/case-studies#tds",
+    services: ["fiber", "construction", "permitting"],
+  },
+  {
+    id: "fremont-das",
+    image: "/images/projects/fremont-das-mounting-detail.png",
+    width: 1065,
+    height: 1170,
+    alt: "Drop-ceiling antenna mounting detail from Odiscom’s Fremont Animal Shelter DAS drawings",
+    client: "AmeriCloud · Fremont, California",
+    title: "DAS construction documents",
+    text: "The 10-sheet Animal Shelter package coordinates site and antenna plans, mounting details, a system block diagram, telecom equipment layouts and electrical drawings.",
+    caption: "Selected antenna-mounting detail from the October 2026 construction package prepared through AmeriCloud.",
+    href: "/case-studies/americloud-das#drawing-package",
+    services: ["wireless", "civil-electrical"],
+  },
+] as const;

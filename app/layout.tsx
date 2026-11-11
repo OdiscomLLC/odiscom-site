@@ -1,10 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
+  ...socialMetadata("Site Acquisition, Engineering & Construction | Odiscom", "Fiber/OSP engineering, site acquisition, joint use, wireless & DAS A&E, network facilities and construction capabilities from Odiscom.", "/"),
   metadataBase: new URL("https://www.odiscom.com"),
   title: {
     default: "Site Acquisition, Engineering & Construction | Odiscom",

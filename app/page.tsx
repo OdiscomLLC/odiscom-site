@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProjectGallery from "@/components/ProjectGallery";
+import { socialMetadata } from "@/lib/social-metadata";
 import BottomCta from "@/components/BottomCta";
 import { serviceLinks } from "@/lib/service-navigation";
 import { services } from "@/lib/services";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction", "Fiber/OSP engineering, site acquisition, wireless & DAS A&E, network facilities and construction capabilities. Explore Odiscom’s actual project scopes.", "/");
 
 const trustedLogos = [
   { name: "AT&T", logo: "/logos/att.png", size: "normal" },
@@ -187,6 +189,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <ProjectGallery />
 
       {/* TRUST STRIP */}
       <section className="border-b border-slate-200 bg-white">

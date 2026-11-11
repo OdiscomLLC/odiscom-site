@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
 import Link from "next/link";
 import BottomCta from "@/components/BottomCta";
 
-export const metadata: Metadata = {
-  title: "Capability Statement",
-  alternates: { canonical: "/capability-statement" },
-  description:
-    "Odiscom capability statement for government, carrier, and infrastructure opportunities across fiber, wireless, towers, and telecom project delivery.",
-};
+export const metadata: Metadata = socialMetadata("Company & Fiber Capability Statements", "Download Odiscom’s company and wireline/fiber capability sheets, with services, selected project experience and Bret’s business-development contact.", "/capability-statement", "company");
 
 const coreCompetencies = [
   "Fiber / OSP engineering: FTTH mainline and drops, aerial and underground route drawings",

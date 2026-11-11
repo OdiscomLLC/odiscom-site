@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
 import Link from "next/link";
 import BottomCta from "@/components/BottomCta";
 import { serviceLinks } from "@/lib/service-navigation";
 import { services } from "@/lib/services";
 
-export const metadata: Metadata = {
-  title: "Site Acquisition, Engineering & Construction Services",
-  description: "Explore Odiscom’s fiber/OSP, joint-use, site acquisition, wireless, structural, civil/electrical, permitting and construction capabilities.",
-  alternates: { canonical: "/services" },
-};
+export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction Services", "Explore Odiscom’s fiber/OSP, joint-use, site acquisition, wireless, structural, civil/electrical, permitting and construction capabilities.", "/services", "company");
 
 export default function ServicesPage() {
   return <main className="bg-white text-slate-900">

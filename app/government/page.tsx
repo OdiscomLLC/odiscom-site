@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
 import Link from "next/link";
 import BottomCta from "@/components/BottomCta";
 
-export const metadata: Metadata = {
-  title: "Government",
-  description:
-    "Odiscom supports government and public-sector telecom infrastructure programs with practical engineering, field-aware coordination, and construction-ready delivery across fiber, wireless, tower, and telecom projects.",
-};
+export const metadata: Metadata = socialMetadata("Government & Public Infrastructure", "Odiscom supports public-sector fiber, wireless and related infrastructure projects with A&E, permitting and construction-phase technical support.", "/government", "company");
 
 const coreCapabilities = [
   "Fiber and OSP engineering support",

@@ -1,5 +1,6 @@
 export const projectExperience = [
   {
+    id: "americloud",
     client: "AmeriCloud",
     location: "California / Washington / Florida",
     category: "DAS & in-building wireless A&E",
@@ -10,6 +11,7 @@ export const projectExperience = [
     detailHref: "/case-studies/americloud-das",
   },
   {
+    id: "tds",
     client: "TDS Telecommunications",
     location: "Helena, Montana / Caldwell, Idaho",
     category: "OSP engineering & joint use",
@@ -19,6 +21,7 @@ export const projectExperience = [
     services: ["fiber", "joint-use", "permitting"],
   },
   {
+    id: "zayo",
     client: "Zayo",
     location: "Denver–Omaha facilities / Richardson–Plano site searches",
     category: "Site acquisition & fiber facilities",
@@ -28,6 +31,7 @@ export const projectExperience = [
     services: ["site-acquisition", "fiber-facilities", "civil-electrical"],
   },
   {
+    id: "horrocks",
     client: "Horrocks",
     location: "Remington Ranch",
     category: "Fiber drawing production",
@@ -37,6 +41,7 @@ export const projectExperience = [
     services: ["fiber", "construction"],
   },
   {
+    id: "stratis",
     client: "Stratis",
     location: "Point Broadband program / Ennis, Texas",
     category: "Underground fiber permitting",
@@ -46,6 +51,7 @@ export const projectExperience = [
     services: ["fiber", "permitting", "construction"],
   },
   {
+    id: "squan",
     client: "SQUAN",
     location: "Wyoming / South Dakota / Oklahoma",
     category: "PE review & make-ready documentation",
@@ -55,6 +61,7 @@ export const projectExperience = [
     services: ["fiber", "joint-use", "permitting"],
   },
   {
+    id: "d4",
     client: "D4 Communications",
     location: "Novato / Victorville, California",
     category: "Fiber facility civil engineering",

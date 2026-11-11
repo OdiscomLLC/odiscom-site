@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
 
-export const metadata: Metadata = {
-  title: "Telecom Clients and Infrastructure Partners",
-  description:
-    "Odiscom supports carriers, tower companies, contractors, and infrastructure partners across fiber, wireless, and telecom deployment programs.",
-};
+export const metadata: Metadata = socialMetadata("Telecom Clients & Infrastructure Partners", "Explore Odiscom’s work with operators, engineering firms and infrastructure partners across fiber, DAS, site acquisition and network facilities.", "/clients", "projects");
 import Image from "next/image"
 import Link from "next/link"
 import BottomCta from "@/components/BottomCta"
