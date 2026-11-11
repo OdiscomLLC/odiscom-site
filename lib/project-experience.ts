@@ -1,5 +1,15 @@
 export const projectExperience = [
   {
+    client: "AmeriCloud",
+    location: "California / Washington / Florida",
+    category: "DAS & in-building wireless A&E",
+    title: "Municipal, government and commercial wireless facilities",
+    summary: "A&E support through AmeriCloud for Fremont municipal DAS, Mercedes-Benz R&D, Washington State DOC headquarters and a Miami Ericsson Radio Dot deployment.",
+    deliverables: ["DAS site assessments and construction drawing packages", "Antenna, equipment and cabling layouts coordinated with RF design", "Electrical engineering, drawing review responses and revisions"],
+    services: ["wireless", "civil-electrical", "permitting"],
+    detailHref: "/case-studies/americloud-das",
+  },
+  {
     client: "TDS Telecommunications",
     location: "Helena, Montana / Caldwell, Idaho",
     category: "OSP engineering & joint use",

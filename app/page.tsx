@@ -168,13 +168,13 @@ export default function HomePage() {
           </p>
 
           <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-            Fiber routes. Joint-use packages. Network facilities.
+            Fiber routes. Wireless systems. Network facilities.
           </h2>
 
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-            Explore our work with TDS, Zayo, Horrocks, Stratis, SQUAN and D4
+            Explore our work with AmeriCloud, TDS, Zayo, Horrocks, Stratis, SQUAN and D4
             Communications—from mainline and drop drawings to ILA facilities
-            and site acquisition.
+            and DAS projects.
           </p>
 
           <div className="mt-10">

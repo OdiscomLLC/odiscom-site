@@ -4,7 +4,7 @@ export const serviceLinks = [
   { slug: "site-acquisition", name: "Site Acquisition & Due Diligence" },
   { slug: "joint-use", name: "Joint Use & Make Ready" },
   { slug: "fiber-facilities", name: "Fiber Huts, ILAs & POPs" },
-  { slug: "wireless", name: "Wireless A&E" },
+  { slug: "wireless", name: "Wireless & DAS A&E" },
   { slug: "towers", name: "Tower & Structural Engineering" },
   { slug: "civil-electrical", name: "Civil & Electrical Engineering" },
   { slug: "permitting", name: "Permitting & Program Services" },

@@ -14,7 +14,7 @@ const coreCompetencies = [
   "Joint use: pole data, loading and clearance reviews, make-ready and utility applications",
   "Site acquisition: candidate searches, property coordination and due diligence",
   "Fiber facilities: ILA, hut, POP and cabinet site engineering",
-  "Wireless A&E, tower and mount analysis, and foundation engineering",
+  "Wireless and DAS A&E, in-building wireless construction documents, tower and mount analysis, and foundation engineering",
   "Civil and electrical drawings, grading, drainage, power and grounding",
   "Permitting, specialist coordination and engineering production support",
   "Construction-phase engineering, field changes, redlines and record drawings",
