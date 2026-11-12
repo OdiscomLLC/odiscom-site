@@ -89,7 +89,6 @@ export async function POST(req: Request) {
       Bret: process.env.CONTACT_TO_BRET || "bret.bachert@odiscom.com",
       Jeff: process.env.CONTACT_TO_JEFF || fallbackTo,
       Jacob: process.env.CONTACT_TO_JACOB || fallbackTo,
-      Royce: process.env.CONTACT_TO_ROYCE || fallbackTo,
       Carolyn: process.env.CONTACT_TO_CAROLYN || fallbackTo,
       "General Team": fallbackTo,
     };

@@ -204,7 +204,6 @@ export default function ContactPage() {
                 <option value="Bret">Bret — Business development / project inquiries</option>
                 <option value="Jeff">Jeff — Founder & CEO</option>
                 <option value="Jacob">Jacob — President / Engineering</option>
-                <option value="Royce">Royce</option>
                 <option value="Carolyn">Carolyn</option>
                 <option value="General Team">General Team</option>
               </select>
