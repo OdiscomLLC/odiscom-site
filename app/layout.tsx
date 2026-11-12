@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <div id="main-content">{children}</div>
         <Footer />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Odiscom LLC", url: "https://www.odiscom.com", logo: "https://www.odiscom.com/logos/odiscom.png", sameAs: ["https://www.linkedin.com/company/odiscom-llc"] }) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Odiscom LLC", url: "https://www.odiscom.com", logo: "https://www.odiscom.com/logos/odiscom.png", sameAs: ["https://www.linkedin.com/company/odiscom-llc"], email: "info@odiscom.com", telephone: "+1-469-531-1176", description: "Site acquisition, fiber and OSP engineering, fiber-optic ILA hut engineering, wireless and DAS A&E, permitting and engineering support for broadband deployment.", address: { "@type": "PostalAddress", addressLocality: "League City", addressRegion: "TX", addressCountry: "US" } }) }} />
         <Analytics />
       </body>
     </html>

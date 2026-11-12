@@ -25,11 +25,11 @@ export default function ProjectExperiencePage() {
         <p className="mt-4 leading-7 text-slate-600">{project.summary}</p>
         <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-slate-500">Odiscom’s scope</p>
         <ul className="mt-4 list-disc space-y-3 pl-5 leading-7 text-slate-700">{project.deliverables.map(item => <li key={item}>{item}</li>)}</ul>
-        {"detailHref" in project && <Link href={project.detailHref} className="mt-6 inline-block font-semibold text-[#166e68]">View AmeriCloud DAS projects →</Link>}
+        {"detailHref" in project && <Link href={project.detailHref} className="mt-6 inline-block font-semibold text-[#166e68]">View detailed project experience →</Link>}
         <div className="mt-7 flex flex-wrap gap-2 border-t border-slate-200 pt-5">{project.services.map(slug => <Link key={slug} href={`/services/${slug}`} className="rounded-full bg-[#f0f7f7] px-4 py-2 text-sm font-medium text-[#166e68]">{services[slug].name}</Link>)}</div>
       </article>)}
     </section>
     <ProjectGallery />
-    <BottomCta title="Have a similar project or production need?" description="Send the scope and schedule to Bret. We’ll connect your project with the right Odiscom team." />
+    <BottomCta title="Have a similar project or production need?" description="Send the scope and schedule to our team. We’ll connect your project with the right Odiscom team." />
   </main>;
 }

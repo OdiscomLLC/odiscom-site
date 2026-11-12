@@ -162,6 +162,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="bg-[#0f3f3b] text-white"><div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 lg:px-8"><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">BEAD deployment partners</p><h2 className="mt-4 text-3xl font-semibold">You have the award. Build the delivery team.</h2><p className="mt-5 leading-8 text-white/80">Engineering, joint use, permitting and construction support for BEAD awardees, ISPs and their prime contractors.</p><Link href="/bead" className="mt-6 inline-block font-semibold underline underline-offset-4">Explore BEAD project support →</Link></div><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">Fiber-optic network facilities</p><h2 className="mt-4 text-3xl font-semibold">ILA huts, shelters and POPs.</h2><p className="mt-5 leading-8 text-white/80">Site acquisition and multidisciplinary engineering, with actual fiber-facility experience for Zayo and D4 Communications / Arcadian.</p><Link href="/case-studies/fiber-ila-huts" className="mt-6 inline-block font-semibold underline underline-offset-4">See our ILA hut experience →</Link></div></div></section>
       {/* PROJECT EXPERIENCE */}
       <section className="bg-[#f7fbfb] py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">

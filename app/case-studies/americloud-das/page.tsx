@@ -35,6 +35,6 @@ export default function AmericloudDasPage() {
     </section>
     <section className="mx-auto max-w-7xl px-6 lg:px-8"><div className="rounded-3xl bg-[#f0f7f7] p-8 md:p-10"><h2 className="text-3xl font-semibold">From the RF design to the construction package.</h2><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">We help translate system requirements and field conditions into coordinated antenna, cabling, equipment, power and grounding documentation. Our engineering team works through venue and jurisdiction comments and keeps revisions aligned across disciplines.</p><div className="mt-6 flex flex-wrap gap-4"><Link href="/services/wireless" className="font-semibold text-[#166e68]">Wireless & DAS A&E →</Link><Link href="/services/civil-electrical" className="font-semibold text-[#166e68]">Civil & electrical engineering →</Link></div></div></section>
     <ProjectGallery only="fremont-das" />
-    <BottomCta title="Planning a DAS or in-building wireless project?" description="Send Bret the venue information, system scope, available RF design, required deliverables and target schedule." />
+    <BottomCta title="Planning a DAS or in-building wireless project?" description="Send our team the venue information, system scope, available RF design, required deliverables and target schedule." />
   </main>;
 }

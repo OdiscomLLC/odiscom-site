@@ -68,9 +68,9 @@ export const services: Record<string, Service> = {
     related: ["fiber", "permitting", "towers"],
   },
   "fiber-facilities": {
-    name: "Fiber Huts, ILAs & POPs",
-    headline: "Engineer the facilities behind the fiber network.",
-    description: "Long-haul and regional fiber networks depend on buildable equipment sites as well as routes. Odiscom supports ILA, hut, POP and cabinet facilities from site due diligence through coordinated civil, structural and electrical drawings.",
+    name: "Fiber-Optic ILA Huts, Shelters & POPs",
+    headline: "Fiber-optic ILA huts, engineered from the site up.",
+    description: "Odiscom provides fiber-optic ILA hut, shelter, POP and cabinet site engineering for long-haul and regional networks. Our experience includes Zayo and D4 Communications / Arcadian fiber-facility programs, from property due diligence through coordinated civil, foundation and electrical drawing packages.",
     image: "/images/construction/construction-crew.jpg", imageAlt: "Infrastructure construction site",
     groups: [
       { title: "Site development", items: ["Candidate fit, access and equipment-layout studies", "Survey and geotechnical coordination", "Property, access and utility easement exhibits"] },

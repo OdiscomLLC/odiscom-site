@@ -24,6 +24,7 @@ export default function ServicesPage() {
       </article>)}
     </section>
     <section className="mx-auto max-w-7xl px-6 lg:px-8"><div className="rounded-3xl bg-[#f0f7f7] p-8 md:p-10"><h2 className="text-3xl font-semibold">Need recurring engineering capacity?</h2><p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">We support drawing production, PE review, permit packages and program coordination for teams with an ongoing project pipeline. Define the standards and handoff once, then work with a team that knows your program.</p><Link href="/case-studies" className="mt-5 inline-block font-semibold text-[#166e68]">See our project experience →</Link></div></section>
-    <BottomCta title="Let’s define your next scope." description="Tell Bret about the route, site or program, your required deliverables and your schedule." />
+    <section className="mx-auto max-w-7xl px-6 pt-12 lg:px-8"><Link href="/bead" className="font-semibold text-[#166e68]">Supporting BEAD awardees? Explore engineering and construction-delivery scopes →</Link></section>
+    <BottomCta title="Let’s define your next scope." description="Tell our team about the route, site or program, your required deliverables and your schedule." />
   </main>;
 }

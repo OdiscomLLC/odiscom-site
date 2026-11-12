@@ -13,7 +13,7 @@ const navItems = [
 ];
 const moreLinks = [
   { label: "Government", href: "/government" },
-  { label: "Events", href: "/events" },
+  { label: "BEAD", href: "/bead" },
   { label: "Careers", href: "/careers" },
 ];
 
