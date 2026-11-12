@@ -21,7 +21,7 @@ if not args.dry_run:
         raise SystemExit('Published verification file does not match')
 sitemap = urllib.request.urlopen(args.site + '/sitemap.xml', timeout=30).read()
 urls = [element.text for element in ET.fromstring(sitemap).iter() if element.tag.endswith('}loc')]
-if not urls or len(urls) > 10000 or any(not url.startswith(args.site + '/') for url in urls):
+if not urls or len(urls) > 10000 or any(url != args.site and not url.startswith(args.site + '/') for url in urls):
     raise SystemExit('Sitemap contains unexpected URLs')
 payload = {'host': urllib.parse.urlparse(args.site).hostname, 'key': key, 'keyLocation': key_url, 'urlList': urls}
 if args.dry_run:
