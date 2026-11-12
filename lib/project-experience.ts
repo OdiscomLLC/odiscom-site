@@ -1,5 +1,14 @@
 export const projectExperience = [
   {
+    id: "nextlink", client: "Nextlink Internet", location: "Multi-state wireless deployment programs",
+    category: "Tower sites, site acquisition & environmental coordination",
+    title: "Wireless site searches, tower drawings and structural coordination",
+    summary: "Site-acquisition assignments, tower-site construction documents, structural engineering coordination and NEPA screening support for Nextlink Internet.",
+    deliverables: ["Nine-ring 2026 site-search and candidate-screening assignment", "Site, equipment, electrical and grounding drawing packages", "Structural-analysis and specialist field-data coordination", "NEPA screening reports, checklists and environmental-review coordination"],
+    services: ["towers", "wireless", "site-acquisition", "civil-electrical", "permitting"],
+    detailHref: "/case-studies/nextlink",
+  },
+  {
     id: "americloud",
     client: "AmeriCloud",
     location: "California / Washington / Florida",

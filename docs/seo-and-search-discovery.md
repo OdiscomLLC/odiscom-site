@@ -8,7 +8,7 @@
 - `/case-studies/d4-rancho-mission-viejo`: Bucker Way, Gavilan Ridge and Horton Way / Cow Camp Road A&E scopes.
 - Construction site: `/bead` and `/services/fiber-huts` describe the separately contracted construction company’s work packages.
 
-The fiber/facility case studies describe relevant project experience; their funding sources have not been verified as BEAD. The RMV page is a text showcase pending explicit approval for the selected engineering drawing excerpts after automatic approval review blocked image upload.
+The fiber/facility case studies describe relevant project experience; their funding sources have not been verified as BEAD. The RMV page now includes the selected drawing excerpts after Jeff explicitly approved their public publication on November 11, 2026.
 
 ## Implemented foundations
 

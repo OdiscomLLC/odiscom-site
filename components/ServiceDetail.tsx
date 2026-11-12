@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "@/components/ProjectGallery";
 import BottomCta from "@/components/BottomCta";
+import { serviceFAQs } from "@/lib/service-faqs";
 import { services } from "@/lib/services";
 import { projectExperience } from "@/lib/project-experience";
 
@@ -53,6 +54,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
       {["fiber", "fiber-facilities", "joint-use", "construction", "permitting"].includes(slug) && <section className="mx-auto max-w-7xl px-6 pt-10 lg:px-8"><Link href="/bead" className="font-semibold text-[#166e68]">Engineering and delivery support for BEAD awardees and their prime contractors →</Link></section>}
       <ProjectGallery service={slug} />
       <section className="mx-auto max-w-7xl px-6 pt-14 lg:px-8"><h2 className="text-xl font-semibold">Related services</h2><div className="mt-5 flex flex-wrap gap-3">{service.related.map(related => <Link key={related} href={`/services/${related}`} className="rounded-full border border-slate-300 px-5 py-3 font-medium text-[#166e68] hover:bg-[#f0f7f7]">{services[related].name}</Link>)}</div></section>
+      {serviceFAQs[slug] && <section className="mx-auto max-w-4xl px-6 pt-14 lg:px-8"><h2 className="text-3xl font-semibold">Questions about {service.name.toLowerCase()}</h2><div className="mt-7 divide-y divide-slate-200">{serviceFAQs[slug].map(([question,answer])=><div key={question} className="py-6"><h3 className="text-xl font-semibold">{question}</h3><p className="mt-4 leading-8 text-slate-600">{answer}</p></div>)}</div></section>}
       <BottomCta title="Build the right scope with Odiscom." description="Bring us your route, site or program. We’ll coordinate the services and deliverables your project needs." />
     </main>
   );

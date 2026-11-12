@@ -7,7 +7,7 @@ import { serviceLinks } from "@/lib/service-navigation";
 import { services } from "@/lib/services";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction", "Fiber/OSP engineering, site acquisition, wireless & DAS A&E, network facilities and construction capabilities. Explore Odiscom’s actual project scopes.", "/");
+export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction", "Tower structural engineering, wireless & DAS A&E, site acquisition, fiber/OSP engineering, network facilities and construction capabilities. Explore Odiscom’s actual project scopes.", "/");
 
 const trustedLogos = [
   { name: "AT&T", logo: "/logos/att.png", size: "normal" },
@@ -162,7 +162,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#0f3f3b] text-white"><div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 lg:px-8"><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">BEAD deployment partners</p><h2 className="mt-4 text-3xl font-semibold">You have the award. Build the delivery team.</h2><p className="mt-5 leading-8 text-white/80">Engineering, joint use, permitting and construction support for BEAD awardees, ISPs and their prime contractors.</p><Link href="/bead" className="mt-6 inline-block font-semibold underline underline-offset-4">Explore BEAD project support →</Link></div><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">Fiber-optic network facilities</p><h2 className="mt-4 text-3xl font-semibold">ILA huts, shelters and POPs.</h2><p className="mt-5 leading-8 text-white/80">Site acquisition and multidisciplinary engineering, with actual fiber-facility experience for Zayo and D4 Communications / Arcadian.</p><Link href="/case-studies/fiber-ila-huts" className="mt-6 inline-block font-semibold underline underline-offset-4">See our ILA hut experience →</Link></div></div></section>
+      <section className="bg-[#0f3f3b] text-white"><div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-3 lg:px-8"><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">Tower & wireless infrastructure</p><h2 className="mt-4 text-3xl font-semibold">Engineering the site behind the signal.</h2><p className="mt-5 leading-8 text-white/80">Tower and mount analysis, foundations, site acquisition and wireless construction documents. Explore our Nextlink and Rancho Mission Viejo work.</p><Link href="/case-studies/nextlink" className="mt-6 inline-block font-semibold underline underline-offset-4">See Nextlink project experience →</Link><Link href="/case-studies/d4-rancho-mission-viejo" className="mt-4 block font-semibold underline underline-offset-4">See RMV tower & shelter engineering →</Link></div><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">BEAD deployment partners</p><h2 className="mt-4 text-3xl font-semibold">You have the award. Build the delivery team.</h2><p className="mt-5 leading-8 text-white/80">Engineering, joint use, permitting and construction support for BEAD awardees, ISPs and their prime contractors.</p><Link href="/bead" className="mt-6 inline-block font-semibold underline underline-offset-4">Explore BEAD project support →</Link></div><div><p className="text-sm font-semibold uppercase tracking-widest text-white/70">Fiber-optic network facilities</p><h2 className="mt-4 text-3xl font-semibold">ILA huts, shelters and POPs.</h2><p className="mt-5 leading-8 text-white/80">Site acquisition and multidisciplinary engineering, with actual fiber-facility experience for Zayo and D4 Communications / Arcadian.</p><Link href="/case-studies/fiber-ila-huts" className="mt-6 inline-block font-semibold underline underline-offset-4">See our ILA hut experience →</Link></div></div></section>
       {/* PROJECT EXPERIENCE */}
       <section className="bg-[#f7fbfb] py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
@@ -175,7 +175,7 @@ export default function HomePage() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-            Explore our work with AmeriCloud, TDS, Zayo, Horrocks, Stratis, SQUAN and D4
+            Explore our work with Nextlink, AmeriCloud, TDS, Zayo, Horrocks, Stratis, SQUAN and D4
             Communications—from mainline and drop drawings to ILA facilities
             and DAS projects.
           </p>

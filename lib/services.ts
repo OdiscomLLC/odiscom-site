@@ -97,11 +97,11 @@ export const services: Record<string, Service> = {
   },
   towers: {
     name: "Tower & Structural Engineering",
-    headline: "Engineering for towers, mounts and foundations.",
-    description: "Odiscom evaluates telecommunications structures and develops engineering packages for modifications and new equipment. Jacob Goralski, P.E., leads the engineering team, connecting structural findings with practical site and construction requirements.",
+    headline: "Cell tower structural analysis, mount analysis and foundation engineering.",
+    description: "Odiscom provides telecom tower structural analysis, antenna-mount analysis, foundation engineering and modification drawings. Jacob Goralski, P.E., leads engineering review for new equipment, existing structures and coordinated tower-site packages. Our experience includes Nextlink assignments and D4 Communications’ Rancho Mission Viejo wireless facilities.",
     image: "/images/Towers/South_Tower.jpg", imageAlt: "Telecommunications tower structure",
     groups: [
-      { title: "Structural analysis", items: ["Tower and equipment-support structural assessments", "Mount analysis and modification engineering", "Foundation review and design within the project scope"] },
+      { title: "Structural analysis", items: ["Cell tower structural analysis and proposed antenna/radio loading reviews", "Antenna-mount analysis and modification engineering", "Tower and equipment-foundation analysis and design", "Self-supporting tower, monopole and equipment-support scopes"] },
       { title: "Data & design", items: ["Existing-drawing, loading and field-data review", "Coordination of mapping or additional investigation where needed", "Modification drawings and structural details"] },
       { title: "Owner & construction support", items: ["Engineering due diligence for infrastructure portfolios", "Equipment-change and construction clarification support", "Technical findings and repair/modification recommendations"] },
     ],
