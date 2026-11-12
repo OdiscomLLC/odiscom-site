@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     const name = clean(body.name, 200);
     const email = clean(body.email, 320);
     const company = clean(body.company, 300);
-    const contactPerson = clean(body.contactPerson, 100) || "Bret";
+    const contactPerson = clean(body.contactPerson, 100) || "General Team";
     const projectDetails = clean(body.details) || clean(body.projectDetails);
     const website = clean(body.website, 500);
 
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const fallbackTo = process.env.CONTACT_TO || "owners@odiscom.com";
+    const fallbackTo = "info@odiscom.com";
 
     const contactMap: Record<string, string> = {
       Bret: process.env.CONTACT_TO_BRET || "bret.bachert@odiscom.com",

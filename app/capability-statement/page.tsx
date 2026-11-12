@@ -28,7 +28,7 @@ const companyData = [
   ["A&E Company", "Odiscom LLC"],
   ["Construction Company", "Odiscom Construction LLC"],
   ["Website", "www.odiscom.com"],
-  ["Email", "owners@odiscom.com"],
+  ["Email", "info@odiscom.com"],
   ["Phone", "(469) 531-1176"],
   ["Headquarters", "League City, Texas"],
   ["A&E Ownership", "51% woman-owned"],

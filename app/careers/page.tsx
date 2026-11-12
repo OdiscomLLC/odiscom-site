@@ -80,7 +80,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="bg-[#f0f7f7] px-6 py-16 text-center"><h2 className="text-3xl font-semibold">Introduce yourself or your crew.</h2><p className="mx-auto mt-5 max-w-2xl leading-8 text-slate-600">Send your background, location and availability. Engineering professionals, project coordinators and construction crews are welcome to introduce themselves for future opportunities.</p><a href="mailto:bret.bachert@odiscom.com?subject=Odiscom%20career%20or%20crew%20inquiry" className="mt-7 inline-block rounded-full bg-[#166e68] px-7 py-4 font-semibold text-white">Send a career or crew inquiry</a><p className="mt-5 text-sm text-slate-600">Engineering roles: Odiscom LLC · Construction opportunities: Odiscom Construction LLC</p></section>
+      <section className="bg-[#f0f7f7] px-6 py-16 text-center"><h2 className="text-3xl font-semibold">Introduce yourself or your crew.</h2><p className="mx-auto mt-5 max-w-2xl leading-8 text-slate-600">Send your background, location and availability. Engineering professionals, project coordinators and construction crews are welcome to introduce themselves for future opportunities.</p><a href="mailto:info@odiscom.com?subject=Odiscom%20career%20or%20crew%20inquiry" className="mt-7 inline-block rounded-full bg-[#166e68] px-7 py-4 font-semibold text-white">Send a career or crew inquiry</a><p className="mt-5 text-sm text-slate-600">Engineering roles: Odiscom LLC · Construction opportunities: Odiscom Construction LLC</p></section>
     </main>
   )
 }

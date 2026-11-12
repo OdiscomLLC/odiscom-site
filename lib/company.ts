@@ -3,7 +3,7 @@ export const COMPANY = {
   location: "League City, TX 77573",
   phoneDisplay: "(469) 531-1176",
   phoneLink: "+14695311176",
-  email: "owners@odiscom.com",
+  email: "info@odiscom.com",
   linkedin: "https://www.linkedin.com/company/odiscom-llc",
   focus: "Fiber, towers, and telecom infrastructure delivery",
   tagline:

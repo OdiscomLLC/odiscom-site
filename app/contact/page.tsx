@@ -20,7 +20,7 @@ const initialForm: FormState = {
   name: "",
   email: "",
   company: "",
-  contactPerson: "Bret",
+  contactPerson: "General Team",
   details: "",
   website: "",
   phone: "",
@@ -82,9 +82,9 @@ export default function ContactPage() {
           </p>
 
           <div className="mt-6 rounded-2xl bg-[#f0f7f7] p-5 leading-7 text-slate-700">
-            <p className="font-semibold">Bret Bachert · Chief Operating Officer</p>
+            <p className="font-semibold">Odiscom project inquiries</p>
             <p>Business development & project inquiries</p>
-            <a href="mailto:bret.bachert@odiscom.com" className="block break-words font-medium text-[#166e68]">bret.bachert@odiscom.com</a>
+            <a href="mailto:info@odiscom.com" className="block break-words font-medium text-[#166e68]">info@odiscom.com</a>
             <a href="tel:+12814092686" className="block text-[#166e68]">(281) 409-2686</a>
             <p className="mt-3 text-sm">A&E: Odiscom LLC · Construction: Odiscom Construction LLC</p>
           </div>
@@ -201,11 +201,11 @@ export default function ContactPage() {
                 onChange={handleChange}
                 className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-teal-600"
               >
-                <option value="Bret">Bret — Business development / project inquiries</option>
+                <option value="General Team">General Team — Project inquiries</option>
+                <option value="Bret">Bret — Chief Operating Officer</option>
                 <option value="Jeff">Jeff — Founder & CEO</option>
                 <option value="Jacob">Jacob — President / Engineering</option>
                 <option value="Carolyn">Carolyn</option>
-                <option value="General Team">General Team</option>
               </select>
             </div>
 

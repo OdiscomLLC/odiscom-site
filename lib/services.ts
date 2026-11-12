@@ -36,7 +36,7 @@ export const services: Record<string, Service> = {
       { title: "Engineering & closeout", items: ["RFI responses, design clarifications and construction drawing revisions", "Field redlines, quantity reconciliation and record drawings", "Coordination of installation, testing and turnover documentation requirements"] },
     ],
     deliverables: ["Defined construction scope and work packages", "Construction-phase engineering responses", "Field change and progress documentation", "Redlines, record drawings and closeout packages"],
-    inputs: "Send the plans, route or site locations, bid requirements, quantities and schedule. Bret will coordinate the engineering and construction scope with the appropriate Odiscom company.",
+    inputs: "Send the plans, route or site locations, bid requirements, quantities and schedule. Our team will coordinate the engineering and construction scope with the appropriate Odiscom company.",
     related: ["fiber", "fiber-facilities", "civil-electrical"],
   },
   "site-acquisition": {

@@ -39,7 +39,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
         </div>
         <div className="mt-10 grid gap-8 rounded-3xl bg-[#f0f7f7] p-7 md:grid-cols-2 md:p-10">
           <div><h2 className="text-2xl font-semibold">Typical deliverables</h2><ul className="mt-5 list-disc space-y-3 pl-5 leading-7 text-slate-700">{service.deliverables.map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div><h2 className="text-2xl font-semibold">Start with your project</h2><p className="mt-5 leading-8 text-slate-700">{service.inputs}</p><Link href="/contact" className="mt-5 inline-block font-semibold text-[#166e68]">Talk with Bret and the team →</Link></div>
+          <div><h2 className="text-2xl font-semibold">Start with your project</h2><p className="mt-5 leading-8 text-slate-700">{service.inputs}</p><Link href="/contact" className="mt-5 inline-block font-semibold text-[#166e68]">Talk with the Odiscom team →</Link></div>
         </div>
       </section>
       {examples.length > 0 && <section className="border-y border-slate-200 bg-[#f7fbfb]">
