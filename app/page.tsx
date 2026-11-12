@@ -141,7 +141,7 @@ export default function HomePage() {
                 className="group rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#1f8a84]/30 hover:shadow-xl"
               >
                 <div className="inline-flex rounded-full bg-[#e8f6f5] px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#1f8a84]">
-                  0{index + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </div>
 
                 <h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900">

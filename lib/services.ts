@@ -4,6 +4,7 @@ export type Service = {
   description: string;
   image: string;
   imageAlt: string;
+  imageCaption?: string;
   groups: { title: string; items: string[] }[];
   deliverables: string[];
   inputs: string;
@@ -11,6 +12,48 @@ export type Service = {
 };
 
 export const services: Record<string, Service> = {
+  environmental: {
+    name: "NEPA, SHPO & Environmental Coordination",
+    headline: "NEPA and SHPO packages that support telecom site development.",
+    description: "Odiscom supports telecom environmental review with NEPA screening and review packages, SHPO and historic-preservation review coordination, archaeological investigation coordination, and FCC or NTIA environmental documentation within the assigned scope. We connect the operator, qualified specialists and engineering team around the site information and required deliverables.",
+    image: "/images/illustrations/telecom-site-review.webp", imageAlt: "Illustration of engineers reviewing a rural wireless site", imageCaption: "Concept illustration · not a completed Odiscom project",
+    groups: [
+      { title: "NEPA & agency documentation", items: ["Telecom NEPA screening and environmental-review packages", "FCC environmental documentation and supporting site information", "NTIA categorical-exclusion documentation support where applicable"] },
+      { title: "Historic & cultural resources", items: ["SHPO and Section 106 historic-preservation review coordination where required", "Archaeological investigation and report coordination with qualified specialists", "Site exhibits, information requests and review-comment tracking"] },
+      { title: "Project coordination", items: ["Define the applicable review scope with the operator and specialist team", "Reconcile site layouts, access and ground-disturbance information", "Track outstanding documents and responses through the assigned review milestones"] },
+    ],
+    deliverables: ["NEPA screening and review packages", "FCC / NTIA environmental documentation within scope", "Coordinated archaeology and historic-review inputs", "Site exhibits and review-status tracking"],
+    inputs: "Send the site location, proposed work and ground disturbance, available environmental records, funding or agency requirements, and schedule. We will define the reviews and responsible providers for your assignment.",
+    related: ["site-acquisition", "towers", "permitting"],
+  },
+  "tower-mapping": {
+    name: "Tower Mapping, Audits & Inspections",
+    headline: "Understand the structure before the next equipment change.",
+    description: "Odiscom scopes tower mapping, audits, inspection support and foundation investigation for tower owners, operators and engineering partners. We coordinate qualified field providers and turn available measurements, photographs and condition records into the inputs needed for engineering review and infrastructure due diligence.",
+    image: "/images/illustrations/telecom-site-review.webp", imageAlt: "Concept illustration of a tower site and ground-based engineering review", imageCaption: "Concept illustration · field and engineering scopes are defined per assignment",
+    groups: [
+      { title: "Structure & equipment mapping", items: ["Full tower and structural mapping packages", "Member, connection, equipment and cable information needed for the assigned analysis", "Rooftop, platform and grain-elevator mapping coordinated to suit the structure"] },
+      { title: "Audits & field investigations", items: ["Tower audits and condition-documentation scopes", "TIA inspection packages within the contracted requirements", "Foundation mapping, geotechnical investigation and specialist field coordination"] },
+      { title: "Engineering handoff", items: ["Reconcile field records against existing drawings and equipment inventories", "Identify missing information and engineering follow-up items", "Connect mapping and inspection findings to structural analysis or modification design"] },
+    ],
+    deliverables: ["Mapping measurements, photographs and field records", "Defined audit and inspection reports", "Foundation and investigation inputs", "Engineering handoff and open-item summaries"],
+    inputs: "Send the site inventory, structure types and heights, access requirements, existing records, proposed loading and the intended use of the mapping or audit. Field-provider and engineering responsibilities are established in the proposal.",
+    related: ["towers", "wireless", "site-acquisition"],
+  },
+  "traffic-control": {
+    name: "Traffic Control & MOT Plans",
+    headline: "Plan the work zone around the route, crossing and access.",
+    description: "Odiscom prepares traffic-control and maintenance-of-traffic (MOT) drawing packages for telecom and utility projects. We coordinate the work area, construction sequence, pedestrian access and roadway interfaces with the assigned jurisdiction and project requirements.",
+    image: "/images/Fiber/trenching_pic.jpg", imageAlt: "Utility corridor construction work",
+    groups: [
+      { title: "Work-zone layouts", items: ["Traffic-control plans for fiber routes and utility work", "Roadway, intersection and crossing work-zone exhibits", "Pedestrian routing and flagging requirements documented within scope"] },
+      { title: "Permit coordination", items: ["MOT and TCP sheets aligned with the permit drawing package", "Jurisdiction comments and plan revisions", "Signed and sealed engineering review where required and within scope"] },
+      { title: "Construction interfaces", items: ["Work sequence, access and staging information from the construction team", "Route-based or location-specific packages", "Coordination of roadway and utility permit requirements"] },
+    ],
+    deliverables: ["Traffic-control and MOT plan sheets", "Roadway and crossing work-zone exhibits", "Permit-review responses and revised plans", "Coordinated construction drawing packages"],
+    inputs: "Send the route or work locations, roadway jurisdiction, construction method, work duration and sequence, available plans and permit requirements.",
+    related: ["fiber", "permitting", "construction"],
+  },
   fiber: {
     name: "Fiber & OSP Engineering",
     headline: "Fiber plans that connect the route to the field.",
@@ -59,7 +102,7 @@ export const services: Record<string, Service> = {
     description: "Odiscom supports aerial fiber programs with pole data, engineering review and utility application packages. We connect field observations, loading and clearance requirements with the documentation needed for attachment review.",
     image: "/images/Towers/South_Tower.jpg", imageAlt: "Vertical telecommunications infrastructure",
     groups: [
-      { title: "Field data & engineering", items: ["Pole inventories, attachment information and field-data reconciliation", "Pole-loading analysis and clearance review", "Make-ready recommendations and engineering documentation"] },
+      { title: "Field data & engineering", items: ["Pole data collection, attachment inventories, photographs and viability grading", "Pole-loading analysis and clearance review", "Make-ready recommendations and engineering documentation"] },
       { title: "Utility applications", items: ["Joint-use application drawings and clearance exhibits", "Pole and attachment schedules supporting utility submissions", "Utility comments, revised exhibits and resubmittal coordination"] },
       { title: "Review & production support", items: ["PE review and signed/sealed packages within the assigned scope", "OTMR letters and supporting documentation where applicable", "Repeatable package production for ongoing broadband programs"] },
     ],
@@ -71,7 +114,7 @@ export const services: Record<string, Service> = {
     name: "Fiber-Optic ILA Huts, Shelters & POPs",
     headline: "Fiber-optic ILA huts, engineered from the site up.",
     description: "Odiscom provides fiber-optic ILA hut, shelter, POP and cabinet site engineering for long-haul and regional networks. Our experience includes Zayo and D4 Communications / Arcadian fiber-facility programs, from property due diligence through coordinated civil, foundation and electrical drawing packages.",
-    image: "/images/construction/construction-crew.jpg", imageAlt: "Infrastructure construction site",
+    image: "/images/illustrations/fiber-ila-facility.webp", imageAlt: "Concept illustration of a fiber-optic ILA hut with utility and site infrastructure", imageCaption: "Concept illustration · not a completed Odiscom project",
     groups: [
       { title: "Site development", items: ["Candidate fit, access and equipment-layout studies", "Survey and geotechnical coordination", "Property, access and utility easement exhibits"] },
       { title: "Multidisciplinary engineering", items: ["Hut, cabinet and equipment foundations", "Grading, drainage, erosion control and access layouts", "Electrical service, generator, grounding and utility interfaces"] },
@@ -102,12 +145,12 @@ export const services: Record<string, Service> = {
     image: "/images/Towers/South_Tower.jpg", imageAlt: "Telecommunications tower structure",
     groups: [
       { title: "Structural analysis", items: ["Cell tower structural analysis and proposed antenna/radio loading reviews", "Antenna-mount analysis and modification engineering", "Tower and equipment-foundation analysis and design", "Self-supporting tower, monopole and equipment-support scopes"] },
-      { title: "Data & design", items: ["Existing-drawing, loading and field-data review", "Coordination of mapping or additional investigation where needed", "Modification drawings and structural details"] },
+      { title: "Data & design", items: ["Tower mapping, audits and inspection inputs coordinated with qualified field providers", "Existing-drawing, loading and field-data review", "Modification drawings, structural details and rigging-plan engineering within scope"] },
       { title: "Owner & construction support", items: ["Engineering due diligence for infrastructure portfolios", "Equipment-change and construction clarification support", "Technical findings and repair/modification recommendations"] },
     ],
     deliverables: ["Structural analysis reports", "Mount and foundation engineering", "Modification drawings and details", "Technical due-diligence summaries"],
     inputs: "Share the structure inventory, existing drawings and analyses, proposed equipment loading, field information and required deliverables.",
-    related: ["wireless", "joint-use", "construction"],
+    related: ["tower-mapping", "wireless", "joint-use"],
   },
   "civil-electrical": {
     name: "Civil & Electrical Engineering",
@@ -115,7 +158,7 @@ export const services: Record<string, Service> = {
     description: "Odiscom develops the civil, structural and electrical components of telecommunications infrastructure projects. Our team coordinates facility layouts and discipline interfaces so permit and construction packages describe the same build.",
     image: "/images/construction/construction-crew.jpg", imageAlt: "Civil infrastructure construction work",
     groups: [
-      { title: "Civil & site engineering", items: ["Site and access layouts, grading and drainage", "Erosion-control and site-development drawings", "Utility layouts and survey/geotechnical coordination"] },
+      { title: "Civil & site engineering", items: ["Site and access layouts, grading and drainage", "Hydrology, hydraulics, stormwater management and detention scopes", "Erosion-control and site-development drawings", "Utility layouts and survey/geotechnical coordination"] },
       { title: "Structures & foundations", items: ["Equipment, hut and cabinet foundations", "Support structures and mounting details", "Structural interfaces with site and equipment plans"] },
       { title: "Electrical & utility interfaces", items: ["Electrical service and equipment-power layouts", "Generator and grounding design coordination", "Power-provider information, service requirements and permit comments"] },
     ],
@@ -130,11 +173,11 @@ export const services: Record<string, Service> = {
     image: "/images/construction/construction-crew.jpg", imageAlt: "Infrastructure project delivery",
     groups: [
       { title: "Permits & agencies", items: ["Municipal, county, transportation and public ROW permit packages", "Railroad and utility-crossing documentation and coordination", "Application tracking, reviewer responses and resubmittals"] },
-      { title: "Specialist coordination", items: ["Survey and geotechnical scopes coordinated with qualified providers", "Environmental and NEPA/FCC review coordination as applicable", "Agency, utility, property-owner and engineering-team interfaces"] },
+      { title: "Specialist coordination", items: ["Survey, FAA 1A documentation, geotechnical and field scopes coordinated with qualified providers", "NEPA, SHPO, archaeology and FCC/NTIA environmental documentation coordination as applicable", "Traffic-control and MOT plans coordinated with roadway permit packages"] },
       { title: "Program & owner support", items: ["Engineering production support and staff augmentation", "Scope, deliverable, schedule and issue tracking", "Technical due diligence, drawing QA/QC and construction-closeout coordination"] },
     ],
     deliverables: ["Application packages and permit exhibits", "Comment-response and submission tracking", "Program status and issue registers", "Coordinated engineering and closeout records"],
     inputs: "Share the project geography, agencies, scope matrix, current applications, delivery standards and milestones.",
-    related: ["site-acquisition", "fiber", "construction"],
+    related: ["environmental", "traffic-control", "site-acquisition"],
   },
 };

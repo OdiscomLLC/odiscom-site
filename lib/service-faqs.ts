@@ -1,4 +1,13 @@
 export const serviceFAQs: Record<string, readonly (readonly [string, string])[]> = {
+ environmental: [
+  ["Do you offer NEPA and SHPO services for telecom sites?", "Yes. We scope NEPA screening and review packages, SHPO and historic-preservation review coordination, archaeological investigation coordination, and supporting site documentation. Qualified specialists and project responsibilities are established for the assignment."],
+  ["Can you support FCC and NTIA environmental documentation?", "Yes. Our services include FCC environmental packages and NTIA categorical-exclusion documentation support within the assigned requirements. The applicable review pathway depends on the project, agency and funding requirements."],
+ ],
+ "tower-mapping": [
+  ["Can you provide tower mapping, audits and inspections?", "Yes. Odiscom scopes full tower mapping, structural and rooftop mapping, tower audits, inspection packages and foundation-investigation inputs. We coordinate qualified field providers and define the field and engineering responsibilities in the proposal."],
+  ["Does tower mapping include structural analysis?", "Mapping and structural analysis are separate deliverables that can be coordinated in one assignment. Mapping documents the structure and equipment; engineering analysis evaluates the assigned loading and design requirements using those records."],
+ ],
+ "traffic-control": [["Do you prepare TCP and maintenance-of-traffic plans for fiber work?", "Yes. We prepare traffic-control and MOT plan sheets for telecom and utility routes, roadway crossings and work zones, coordinated with the construction method, jurisdiction requirements and permit package."]],
  towers: [
   ["Do you provide cell tower structural analysis?", "Yes. Odiscom scopes tower structural analysis, antenna-mount analysis, foundation engineering and modification drawings for telecommunications infrastructure. The responsible engineer establishes the analysis requirements from the proposed loading, existing records and project criteria."],
   ["What information is needed for tower and mount analysis?", "Send the tower and mount drawings, current analysis, proposed antenna and radio loading, cable information, foundation records and available mapping or photographs. We identify the additional field information needed for the assigned analysis."],

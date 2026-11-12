@@ -25,6 +25,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
           </div>
           <div className="relative min-h-64 lg:min-h-full">
             <Image src={service.image} alt={service.imageAlt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+            {service.imageCaption && <p className="absolute inset-x-0 bottom-0 bg-slate-900/85 px-5 py-3 text-xs leading-5 text-white">{service.imageCaption}</p>}
           </div>
         </div>
       </section>
@@ -51,7 +52,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
         </div>
       </section>}
       {slug === "fiber-facilities" && <section className="mx-auto max-w-7xl px-6 pt-12 lg:px-8"><Link href="/case-studies/fiber-ila-huts" className="inline-block rounded-2xl bg-[#f0f7f7] p-6 font-semibold text-[#166e68]">Explore Zayo and D4 / Arcadian fiber-optic ILA hut experience →</Link></section>}
-      {["fiber", "fiber-facilities", "joint-use", "construction", "permitting"].includes(slug) && <section className="mx-auto max-w-7xl px-6 pt-10 lg:px-8"><Link href="/bead" className="font-semibold text-[#166e68]">Engineering and delivery support for BEAD awardees and their prime contractors →</Link></section>}
+      {["fiber", "fiber-facilities", "joint-use", "construction", "permitting", "environmental", "traffic-control"].includes(slug) && <section className="mx-auto max-w-7xl px-6 pt-10 lg:px-8"><Link href="/bead" className="font-semibold text-[#166e68]">Engineering and delivery support for BEAD awardees and their prime contractors →</Link></section>}
       <ProjectGallery service={slug} />
       <section className="mx-auto max-w-7xl px-6 pt-14 lg:px-8"><h2 className="text-xl font-semibold">Related services</h2><div className="mt-5 flex flex-wrap gap-3">{service.related.map(related => <Link key={related} href={`/services/${related}`} className="rounded-full border border-slate-300 px-5 py-3 font-medium text-[#166e68] hover:bg-[#f0f7f7]">{services[related].name}</Link>)}</div></section>
       {serviceFAQs[slug] && <section className="mx-auto max-w-4xl px-6 pt-14 lg:px-8"><h2 className="text-3xl font-semibold">Questions about {service.name.toLowerCase()}</h2><div className="mt-7 divide-y divide-slate-200">{serviceFAQs[slug].map(([question,answer])=><div key={question} className="py-6"><h3 className="text-xl font-semibold">{question}</h3><p className="mt-4 leading-8 text-slate-600">{answer}</p></div>)}</div></section>}

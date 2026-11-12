@@ -5,7 +5,7 @@ import BottomCta from "@/components/BottomCta";
 import { serviceLinks } from "@/lib/service-navigation";
 import { services } from "@/lib/services";
 
-export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction Services", "Explore Odiscom’s fiber/OSP, joint-use, site acquisition, wireless, structural, civil/electrical, permitting and construction capabilities.", "/services", "company");
+export const metadata: Metadata = socialMetadata("Site Acquisition, Engineering & Construction Services", "Explore Odiscom’s tower mapping and audits, NEPA/SHPO coordination, wireless, fiber/OSP, joint-use, site acquisition, traffic-control plans and engineering services.", "/services", "company");
 
 export default function ServicesPage() {
   return <main className="bg-white text-slate-900">
@@ -17,7 +17,7 @@ export default function ServicesPage() {
     </div></section>
     <section className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
       {serviceLinks.map((item, index) => <article key={item.slug} className="flex flex-col rounded-3xl border border-slate-200 p-7 shadow-sm">
-        <p className="text-sm font-semibold text-[#166e68]">0{index + 1}</p>
+        <p className="text-sm font-semibold text-[#166e68]">{String(index + 1).padStart(2, "0")}</p>
         <h2 className="mt-4 text-2xl font-semibold">{item.name}</h2>
         <p className="mt-4 flex-1 leading-7 text-slate-600">{services[item.slug].description}</p>
         <Link href={`/services/${item.slug}`} className="mt-6 inline-block font-semibold text-[#166e68]">Explore scope & deliverables →</Link>
