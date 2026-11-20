@@ -27,6 +27,29 @@ const trustedLogos = [
   { name: "Vertical Bridge", logo: "/logos/verticalbridge.png", size: "xlarge" },
 ] as const;
 
+const fiberMetrics = [
+  {
+    value: "500+",
+    label: "Fiber construction and permit sets",
+    detail: "Route sheets, crossing details and right-of-way plans for crews and permitting agencies.",
+  },
+  {
+    value: "2,000,000+",
+    label: "Linear feet of fiber drawings",
+    detail: "Our team designed or sealed drawings for aerial and underground fiber routes.",
+  },
+  {
+    value: "15,000+",
+    label: "Poles fielded",
+    detail: "Field crews documented poles in Idaho, Washington and New Mexico for joint-use applications.",
+  },
+  {
+    value: "6,300+",
+    label: "Pole loading analyses",
+    detail: "Engineering reviews of proposed attachments to support make-ready design and utility permits.",
+  },
+];
+
 const coreServices = serviceLinks.map(item => ({ name: item.name, href: `/services/${item.slug}`, description: services[item.slug].description }));
 
 function getLogoSizing(size?: "small" | "normal" | "large" | "xlarge") {
@@ -51,6 +74,27 @@ export default function HomePage() {
 
   return (
     <main className="bg-white text-slate-900">
+      <section aria-labelledby="fiber-experience" className="border-b border-slate-200 bg-[#f7fbfb]">
+        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-12">
+          <h1 id="fiber-experience" className="text-2xl font-semibold tracking-tight text-[#0f3f3b] sm:text-3xl">
+            Fiber engineering by the numbers
+          </h1>
+          <p className="mt-1 text-sm text-slate-600">Odiscom project records, November 2023 to November 2026</p>
+
+          <ul className="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+            {fiberMetrics.map(({ value, label, detail }) => (
+              <li key={label} className="border-t border-[#bdd7d5] py-5">
+                <h2>
+                  <span className="block text-4xl font-bold tracking-tight text-[#115a55] xl:text-5xl">{value}</span>
+                  <span className="mt-2 block text-lg font-semibold leading-snug">{label}</span>
+                </h2>
+                <p className="mt-2 max-w-prose leading-6 text-slate-600">{detail}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* HERO */}
       <section className="relative min-h-[760px] overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-1/2">
@@ -83,9 +127,9 @@ export default function HomePage() {
               Site Acquisition • Engineering • Construction
             </p>
 
-            <h1 className="text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl">
+            <h2 className="text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl">
               From site acquisition to engineering and construction.
-            </h1>
+            </h2>
 
             <p className="mt-7 max-w-2xl text-xl leading-9 text-white/90">
               Fiber networks, wireless sites and the facilities that connect them.
