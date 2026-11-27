@@ -64,3 +64,24 @@ export async function saveHarvest(pool, body) {
     client.release();
   }
 }
+
+export async function reviewCandidate(pool,id,action) {
+  const statuses={approve:'approved',reject:'rejected',reset:'queued'};
+  if(!Object.hasOwn(statuses,action)) throw badRequest('Unknown review action');
+  const db=await pool.connect();
+  try {
+    await db.query('BEGIN');
+    const {rows}=await db.query('SELECT * FROM public.event_candidates WHERE id=$1 FOR UPDATE',[id]);
+    if(!rows.length) throw badRequest('Candidate not found');
+    const row=rows[0];
+    if(action==='approve'){
+      if(!row.starts_at) throw badRequest('An event date is required to publish');
+      await upsertRows(db,'events',eventFields,[{slug:'review-'+id,title:row.title,source:row.source,description:row.description,location:row.location,starts_at:row.starts_at,ends_at:row.ends_at,url:row.url,organizer:row.organizer}]);
+    }
+    const status=statuses[action];
+    await db.query('UPDATE public.event_candidates SET status=$2,updated_at=now() WHERE id=$1',[id,status]);
+    await db.query('COMMIT');
+    return {ok:true,status};
+  } catch(error) { await db.query('ROLLBACK');throw error; }
+  finally {db.release();}
+}

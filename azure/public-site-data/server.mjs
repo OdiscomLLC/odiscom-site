@@ -1,20 +1,21 @@
 import http from 'node:http';
+import { requireStaff } from './staff.mjs';
 import pg from 'pg';
 import { ManagedIdentityCredential } from '@azure/identity';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
-import { readEvents, readCandidates, saveHarvest, badRequest } from './events.mjs';
+import { readEvents, readCandidates, reviewCandidate, saveHarvest, badRequest } from './events.mjs';
 
 const issuer = 'https://oidc.vercel.com/odiscom-6379s-projects';
 const keys = createRemoteJWKSet(new URL(issuer + '/.well-known/jwks'));
 const identity = new ManagedIdentityCredential();
 const pool = new pg.Pool({
-  host: 'pg-oai-test-ibusbyhjai3di.postgres.database.azure.com',
+  host: process.env.PUBLIC_SITE_PG_HOST || 'pg-oai-test-ibusbyhjai3di.postgres.database.azure.com',
   database: 'odiscom_production',
   user: process.env.PUBLIC_SITE_PG_ROLE,
   port: 5432,
-  ssl: { rejectUnauthorized: true },
+  ssl: { rejectUnauthorized: true, servername: 'pg-oai-test-ibusbyhjai3di.postgres.database.azure.com' },
   password: async () => (await identity.getToken('https://ossrdbms-aad.database.windows.net/.default')).token,
-  max: 4, connectionTimeoutMillis: 8000, statement_timeout: 10000
+  max: 4, connectionTimeoutMillis: 20000, statement_timeout: 10000
 });
 pool.on('error', () => console.error('Public site database connection closed'));
 
@@ -50,6 +51,12 @@ http.createServer(async (req,res) => {
     let result;
     if (req.method === 'GET' && url.pathname === '/events') {
       result = await readEvents(pool,url.searchParams);
+    } else if(url.pathname === '/staff/candidates' || url.pathname.startsWith('/staff/candidates/')) {
+      await requireStaff(req);
+      const match = url.pathname.match(/^\/staff\/candidates\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i);
+      if(req.method==='GET' && url.pathname==='/staff/candidates') result={items:await readCandidates(pool,url.searchParams)};
+      else if(req.method==='POST' && match) result=await reviewCandidate(pool,match[1],(await json(req)).action);
+      else {res.writeHead(404);res.end('{}');return;}
     } else {
       await requireWebsite(req);
       if (req.method === 'POST' && url.pathname === '/harvest') result = await saveHarvest(pool, await json(req));

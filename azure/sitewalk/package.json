@@ -1,0 +1,21 @@
+{
+  "name": "odiscom-sitewalk",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild ui/main.tsx --bundle --minify --jsx=automatic --outfile=dist/walk.js && esbuild report.ts --platform=node --format=esm --outfile=dist/report.mjs && esbuild ui/review-main.tsx --bundle --minify --jsx=automatic --outfile=dist/review.js",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@azure/identity": "4.14.1",
+    "express": "^5.1.0",
+    "pg": "8.23.0",
+    "pdf-lib": "^1.17.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "jose": "6.2.12"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.0"
+  }
+}
