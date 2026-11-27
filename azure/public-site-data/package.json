@@ -1,0 +1,8 @@
+{
+  "name": "odiscom-public-site-data",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node server.mjs" },
+  "dependencies": { "@azure/identity": "4.14.1", "jose": "6.2.12", "pg": "8.23.0" }
+}

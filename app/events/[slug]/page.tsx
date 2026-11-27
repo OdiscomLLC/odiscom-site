@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createClient } from "@supabase/supabase-js";
+import { eventBySlug } from "@/lib/azure-events";
 
 export const dynamic = "force-dynamic";
 
@@ -39,18 +39,8 @@ export default async function EventDetailPage({
 }) {
   const { slug } = await params;
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
-  const { data, error } = await supabase
-    .from("events")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  if (error || !data) {
+  const data = await eventBySlug(slug);
+  if (!data) {
     notFound();
   }
 
@@ -106,7 +96,7 @@ export default async function EventDetailPage({
             </div>
             <div className="mt-1">
               <a
-                href={data.url}
+                href={data.url || undefined}
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-emerald-700 hover:text-emerald-800"

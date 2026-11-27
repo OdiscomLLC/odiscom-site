@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { eventBySlug, listEvents } from "./azure-events";
 
 export type EventItem = {
   id: string;
@@ -10,25 +10,7 @@ export type EventItem = {
   created_at?: string;
 };
 
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
-
-export async function getEventBySlug(slug: string) {
-  const supabase = getSupabase();
-
-  const { data, error } = await supabase
-    .from("events")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  if (error) return null;
-  return data as EventItem | null;
-}
+export const getEventBySlug = eventBySlug;
 
 export function parseMonthParam(month?: string) {
   const now = new Date();
@@ -80,20 +62,7 @@ export function formatTimeRange(startIso: string) {
 }
 
 export async function eventsForMonth(year: number, monthIndex: number) {
-  const supabase = getSupabase();
-
-  const { data: events = [] } = await supabase
-    .from("events")
-    .select("*")
-    .order("starts_at", { ascending: true });
-
-  const start = new Date(year, monthIndex, 1);
-  const end = new Date(year, monthIndex + 1, 1);
-
-  return (events as EventItem[]).filter((e) => {
-    const d = new Date(e.starts_at);
-    return d >= start && d < end;
-  });
+  return listEvents(monthKey(year, monthIndex));
 }
 
 export function eventsByDayMap(events: EventItem[]) {
