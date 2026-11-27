@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { saveHarvest } from "@/lib/azure-events";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -566,21 +566,9 @@ export async function GET(req: Request) {
   const bearer = authHeader?.replace(/^Bearer\s+/i, "");
   const secret = process.env.CRON_SECRET;
 
-  if (secret && bearer !== secret) {
+  if (!secret || bearer !== secret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !serviceRoleKey) {
-    return NextResponse.json(
-      { error: "Missing Supabase environment variables" },
-      { status: 500 }
-    );
-  }
-
-  const supabase = createClient(supabaseUrl, serviceRoleKey);
 
   const allEvents: RawEvent[] = [];
   const sourceSummaries: Array<{
@@ -669,36 +657,14 @@ export async function GET(req: Request) {
     };
   });
 
-  let publishedCount = 0;
-  let queuedCount = 0;
-  let candidateQueueWarning: string | null = null;
-
-  if (publishRows.length) {
-    const { error } = await supabase.from("events").upsert(publishRows, {
-      onConflict: "slug",
-    });
-
-    if (error) {
-      return NextResponse.json(
-        { error: error.message, phase: "publish", count: publishRows.length },
-        { status: 500 }
-      );
-    }
-
-    publishedCount = publishRows.length;
+  let saved;
+  try {
+    saved = await saveHarvest({ events: publishRows, candidates: candidateRows });
+  } catch {
+    return NextResponse.json({ error: "Event harvest could not be saved." }, { status: 503 });
   }
-
-  if (candidateRows.length) {
-    const { error } = await supabase.from("event_candidates").upsert(candidateRows, {
-      onConflict: "candidate_key",
-    });
-
-    if (error) {
-      candidateQueueWarning = error.message;
-    } else {
-      queuedCount = candidateRows.length;
-    }
-  }
+  const { published: publishedCount, queued: queuedCount } = saved;
+  const candidateQueueWarning = null;
 
   for (const summary of sourceSummaries) {
     const sourcePublishCount = publishable.filter(

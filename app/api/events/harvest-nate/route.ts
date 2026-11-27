@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { createClient } from "@supabase/supabase-js";
+import { saveHarvest } from "@/lib/azure-events";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -80,10 +80,6 @@ export async function POST(req: NextRequest) {
   const provided = req.headers.get("x-cron-secret") || req.nextUrl.searchParams.get("secret");
   if (!required || provided !== required) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!supabaseUrl || !serviceKey) return NextResponse.json({ error: "Missing Supabase configuration" }, { status: 500 });
-
   const promote = req.nextUrl.searchParams.get("promote") === "true";
   const html = await fetch(CALENDAR_URL, { cache: "no-store" }).then((r) => r.text());
   const links = findLinks(html);
@@ -112,7 +108,6 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const supabase = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const candidates = events.map((e) => ({
     candidate_key: `nate|${e.slug}|${e.url}`,
     title: e.title,
@@ -128,8 +123,14 @@ export async function POST(req: NextRequest) {
     confidence_reason: "Harvested from NATE calendar detail page.",
     status: promote ? "promoted" : "queued",
   }));
-  if (candidates.length) await supabase.from("event_candidates").upsert(candidates, { onConflict: "candidate_key" });
-  if (promote && events.length) await supabase.from("events").upsert(events.map((e) => ({ ...e, category: e.source, link: e.url })), { onConflict: "slug" });
+  try {
+    await saveHarvest({
+      candidates,
+      events: promote ? events.map((event) => ({ ...event, category: event.source, link: event.url })) : [],
+    });
+  } catch {
+    return NextResponse.json({ error: "Event harvest could not be saved." }, { status: 503 });
+  }
 
   return NextResponse.json({ ok: true, discovered_links: links.length, harvested_events: events.length, promoted_to_live_events: promote ? events.length : 0 });
 }

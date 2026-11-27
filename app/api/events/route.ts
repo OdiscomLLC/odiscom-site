@@ -1,112 +1,20 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
+import { listEvents } from "@/lib/azure-events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type SourceName = "all" | "nate" | "wia" | "fiberconnect" | "other";
-
-function monthStart(date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), 1);
-}
-
 export async function GET(req: NextRequest) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !serviceRoleKey) {
-    return NextResponse.json(
-      {
-        error: "Missing env vars",
-        hasSupabaseUrl: Boolean(supabaseUrl),
-        hasServiceRoleKey: Boolean(serviceRoleKey),
-      },
-      { status: 500 }
-    );
-  }
-
+  const month = req.nextUrl.searchParams.get("month");
+  const selectedMonth = month && /^\d{4}-(0[1-9]|1[0-2])$/.test(month)
+    ? month : new Date().toISOString().slice(0, 7);
+  const sourceParam = req.nextUrl.searchParams.get("source") || "all";
   try {
-    const monthParam = req.nextUrl.searchParams.get("month");
-    const sourceParam = (req.nextUrl.searchParams.get("source") ||
-      "all") as SourceName;
-
-    const selectedMonth =
-      monthParam && /^\d{4}-\d{2}$/.test(monthParam)
-        ? monthParam
-        : new Date().toISOString().slice(0, 7);
-
-    const baseDate = new Date(`${selectedMonth}-01T12:00:00`);
-    const start = monthStart(baseDate).toISOString();
-    const end = new Date(
-      baseDate.getFullYear(),
-      baseDate.getMonth() + 1,
-      1
-    ).toISOString();
-
-    const supabase = createClient(supabaseUrl, serviceRoleKey, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-      global: {
-        fetch: fetch,
-      },
-    });
-
-    let query = supabase
-      .from("events")
-      .select(
-        "id,title,slug,source,description,location,starts_at,ends_at,url,organizer"
-      )
-      .gte("starts_at", start)
-      .lt("starts_at", end)
-      .order("starts_at", { ascending: true });
-
-    if (sourceParam !== "all") {
-      query = query.eq("source", sourceParam);
-    }
-
-    const { data, error } = await query;
-
-    if (error) {
-      return NextResponse.json(
-        {
-          error: error.message,
-          code: error.code ?? null,
-          details: error.details ?? null,
-          hint: error.hint ?? null,
-        },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      events: data || [],
-      debug: {
-        selectedMonth,
-        sourceParam,
-        count: data?.length || 0,
-      },
-    });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error: error instanceof Error ? error.message : "Unknown API error",
-        stack:
-          error instanceof Error && process.env.NODE_ENV !== "production"
-            ? error.stack
-            : undefined,
-        debug: {
-          supabaseUrlHost: (() => {
-            try {
-              return new URL(supabaseUrl).host;
-            } catch {
-              return "INVALID_URL";
-            }
-          })(),
-        },
-      },
-      { status: 500 }
-    );
+    const rows = await listEvents(selectedMonth, sourceParam);
+    const events = rows.map(({ id, title, slug, source, description, location, starts_at, ends_at, url, organizer }) =>
+      ({ id, title, slug, source, description, location, starts_at, ends_at, url, organizer }));
+    return NextResponse.json({ events, debug: { selectedMonth, sourceParam, count: events.length } });
+  } catch {
+    return NextResponse.json({ error: "Event calendar is temporarily unavailable." }, { status: 503 });
   }
 }
