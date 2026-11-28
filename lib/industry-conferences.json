@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "slug": "wia-connect-x-2027-2027-05-10",
+      "source": "wia",
+      "title": "Connect (X) 2027",
+      "organizer": "Wireless Infrastructure Association",
+      "location": "Phoenix Convention Center, Phoenix, AZ",
+      "starts_at": "2027-05-10T00:00:00Z",
+      "ends_at": "2027-05-12T00:00:00Z",
+      "url": "https://wia.org/event/connect-x-2027-powered-by-wia/"
+    },
+    {
+      "slug": "fiberconnect-fiber-connect-2027-2027-06-13",
+      "source": "fiberconnect",
+      "title": "Fiber Connect 2027",
+      "organizer": "Fiber Broadband Association",
+      "location": "Gaylord Opryland, Nashville, TN",
+      "starts_at": "2027-06-13T00:00:00Z",
+      "ends_at": "2027-06-16T00:00:00Z",
+      "url": "https://fiberconnect.fiberbroadband.org/"
+    }
+  ],
+  "candidates": []
+}

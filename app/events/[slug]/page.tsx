@@ -8,6 +8,9 @@ const SOURCE_LABELS = {
   nate: "NATE",
   wia: "WIA",
   fiberconnect: "Fiber Connect",
+  scte: "SCTE",
+  mountainconnect: "Mountain Connect",
+  eventbrite: "Eventbrite",
   other: "Other",
 };
 
@@ -106,6 +109,10 @@ export default async function EventDetailPage({
             </div>
           </div>
         </div>
+
+        <a href={`/api/events/${encodeURIComponent(slug)}.ics`} download className="mt-6 inline-block rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">
+          Add to my calendar
+        </a>
 
         {data.description ? (
           <div className="mt-8">
