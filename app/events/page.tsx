@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import conferences from "@/lib/industry-conferences.json";
+import { useRouter, useSearchParams } from "next/navigation";
 
-type SourceName = "all" | "nate" | "wia" | "fiberconnect" | "other";
+type SourceName = "all" | "nate" | "wia" | "fiberconnect" | "scte" | "mountainconnect" | "eventbrite" | "other";
 type ViewMode = "month" | "agenda";
 
 type EventRow = {
@@ -25,6 +26,9 @@ const SOURCE_LABELS: Record<SourceName, string> = {
   nate: "NATE",
   wia: "WIA",
   fiberconnect: "Fiber Connect",
+  scte: "SCTE",
+  mountainconnect: "Mountain Connect",
+  eventbrite: "Eventbrite",
   other: "Other",
 };
 
@@ -32,6 +36,9 @@ const SOURCE_BADGES: Record<Exclude<SourceName, "all">, string> = {
   nate: "bg-emerald-50 text-emerald-700 ring-emerald-200",
   wia: "bg-sky-50 text-sky-700 ring-sky-200",
   fiberconnect: "bg-amber-50 text-amber-700 ring-amber-200",
+  scte: "bg-indigo-50 text-indigo-700 ring-indigo-200",
+  mountainconnect: "bg-purple-50 text-purple-700 ring-purple-200",
+  eventbrite: "bg-orange-50 text-orange-700 ring-orange-200",
   other: "bg-slate-100 text-slate-700 ring-slate-200",
 };
 
@@ -39,6 +46,9 @@ const SOURCE_TILE_BORDERS: Record<Exclude<SourceName, "all">, string> = {
   nate: "border-l-emerald-500",
   wia: "border-l-sky-500",
   fiberconnect: "border-l-amber-500",
+  scte: "border-l-indigo-500",
+  mountainconnect: "border-l-purple-500",
+  eventbrite: "border-l-orange-500",
   other: "border-l-slate-400",
 };
 
@@ -47,6 +57,9 @@ const ALLOWED_SOURCES: SourceName[] = [
   "nate",
   "wia",
   "fiberconnect",
+  "scte",
+  "mountainconnect",
+  "eventbrite",
   "other",
 ];
 
@@ -102,7 +115,7 @@ function fmtTime(value: string) {
 }
 
 function dayKey(date: Date) {
-  return date.toISOString().slice(0, 10);
+  return fmtMonthInput(date) + "-" + String(date.getDate()).padStart(2, "0");
 }
 
 function getCalendarCells(viewDate: Date) {
@@ -138,9 +151,16 @@ function sortEvents(events: EventRow[]) {
   });
 }
 
+// The feeds use midnight UTC for dates without a start time.
+function displayDate(value: string) {
+  const date = new Date(value);
+  if (fmtTime(value)) return date;
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 12);
+}
+
 function getDateRangeText(event: EventRow) {
-  const start = new Date(event.starts_at);
-  const end = event.ends_at ? new Date(event.ends_at) : null;
+  const start = displayDate(event.starts_at);
+  const end = event.ends_at ? displayDate(event.ends_at) : null;
 
   const startText = new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -158,8 +178,8 @@ function getDateRangeText(event: EventRow) {
 }
 
 function formatFullDate(event: EventRow) {
-  const start = new Date(event.starts_at);
-  const end = event.ends_at ? new Date(event.ends_at) : null;
+  const start = displayDate(event.starts_at);
+  const end = event.ends_at ? displayDate(event.ends_at) : null;
 
   const startText = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -279,6 +299,9 @@ function EventModal({
           </div>
         </div>
 
+        {event.slug && <a href={`/api/events/${encodeURIComponent(event.slug)}.ics`} download className="mt-5 inline-block rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">
+          Add to my calendar
+        </a>}
         {event.description ? (
           <div className="mt-5 rounded-2xl bg-slate-50 p-4">
             <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -294,11 +317,18 @@ function EventModal({
   );
 }
 
+function subscribeToScreenSize(update: () => void) {
+  const query = window.matchMedia("(max-width: 639px)");
+  query.addEventListener("change", update);
+  return () => query.removeEventListener("change", update);
+}
+
 function EventsPageInner() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const selectedMonth =
-    searchParams.get("month") && /^\d{4}-\d{2}$/.test(searchParams.get("month") || "")
+    searchParams.get("month") && /^(?!0000)\d{4}-(0[1-9]|1[0-2])$/.test(searchParams.get("month") || "")
       ? (searchParams.get("month") as string)
       : fmtMonthInput(new Date());
 
@@ -308,13 +338,16 @@ function EventsPageInner() {
     ? ((searchParams.get("source") || "all") as SourceName)
     : "all";
 
-  const selectedView: ViewMode =
-    searchParams.get("view") === "agenda" ? "agenda" : "month";
+  const smallScreen = useSyncExternalStore(subscribeToScreenSize,
+    () => window.matchMedia("(max-width: 639px)").matches, () => false);
+  const view = searchParams.get("view");
+  const selectedView: ViewMode = view === "agenda" || view === "month" ? view : smallScreen ? "agenda" : "month";
 
   const [events, setEvents] = useState<EventRow[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeEvent, setActiveEvent] = useState<EventRow | null>(null);
+  const [expandedDay, setExpandedDay] = useState("");
   const [search, setSearch] = useState("");
 
   const viewDate = useMemo(
@@ -331,7 +364,7 @@ function EventsPageInner() {
         setError(null);
 
         const res = await fetch(
-          `/api/events?month=${selectedMonth}&source=${selectedSource}`,
+          `/api/events?month=${selectedMonth}`,
           { cache: "no-store" }
         );
 
@@ -342,7 +375,10 @@ function EventsPageInner() {
         }
 
         if (!cancelled) {
-          setEvents(sortEvents(Array.isArray(json.events) ? json.events : []));
+          const rows: EventRow[] = Array.isArray(json.events) ? json.events : [];
+          setEvents(sortEvents(rows.map(row => ({
+            ...row, source: Object.hasOwn(SOURCE_BADGES, row.source) ? row.source : "other"
+          }))));
         }
       } catch (err) {
         if (!cancelled) {
@@ -361,9 +397,9 @@ function EventsPageInner() {
     return () => {
       cancelled = true;
     };
-  }, [selectedMonth, selectedSource]);
+  }, [selectedMonth]);
 
-  const filteredEvents = useMemo(() => {
+  const searchResults = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return events;
 
@@ -382,27 +418,31 @@ function EventsPageInner() {
     });
   }, [events, search]);
 
+  const filteredEvents = selectedSource === "all" ? searchResults : searchResults.filter(event => event.source === selectedSource);
+  const today = dayKey(new Date());
+  const featured = conferences.events.filter(event => event.ends_at.slice(0,10) >= today);
+
   const prevMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
   const nextMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
   const days = getCalendarCells(viewDate);
 
   const eventsByDay = new Map<string, EventRow[]>();
   for (const event of filteredEvents) {
-    const key = event.starts_at.slice(0, 10);
+    const key = dayKey(displayDate(event.starts_at));
     const list = eventsByDay.get(key) || [];
     list.push(event);
     eventsByDay.set(key, list);
   }
 
-  const upcoming = filteredEvents.slice(0, 10);
+  const upcoming = filteredEvents.filter(event => dayKey(displayDate(event.ends_at || event.starts_at)) >= today).slice(0, 10);
 
-  const countsBySource = filteredEvents.reduce<Record<SourceName, number>>(
+  const countsBySource = searchResults.reduce<Record<SourceName, number>>(
     (acc, event) => {
       acc.all += 1;
       acc[event.source] += 1;
       return acc;
     },
-    { all: 0, nate: 0, wia: 0, fiberconnect: 0, other: 0 }
+    { all: 0, nate: 0, wia: 0, fiberconnect: 0, scte: 0, mountainconnect: 0, eventbrite: 0, other: 0 }
   );
 
   return (
@@ -417,8 +457,7 @@ function EventsPageInner() {
               Telecom conference and association calendar
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-              Clean month view, filters, search, agenda mode, and quick event details
-              for NATE, WIA, Fiber Connect, and other industry events.
+              Find conferences, workshops, and association events for wireless infrastructure and fiber broadband.
             </p>
           </div>
 
@@ -428,13 +467,14 @@ function EventsPageInner() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search events, location, organizer..."
+                aria-label="Search events in the selected month"
+                placeholder="Search by event, location, or organizer"
                 className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none ring-0 placeholder:text-slate-400 focus:border-emerald-300"
               />
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {ALLOWED_SOURCES.map((source) => {
+              {ALLOWED_SOURCES.filter(source => source === "all" || source === selectedSource || countsBySource[source] > 0).map((source) => {
                 const active = source === selectedSource;
                 return (
                   <Link
@@ -459,7 +499,12 @@ function EventsPageInner() {
               })}
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <label className="text-sm font-medium text-slate-700">Jump to month
+                <input type="month" value={selectedMonth} onChange={e => {
+                  if (/^(?!0000)\d{4}-(0[1-9]|1[0-2])$/.test(e.target.value)) router.push(buildMonthHref(e.target.value,selectedSource,selectedView));
+                }} className="ml-2 rounded-lg border border-slate-200 px-2 py-1" />
+              </label>
               <Link
                 href={buildMonthHref(selectedMonth, selectedSource, "month")}
                 className={`rounded-xl px-4 py-2 text-sm font-medium ${
@@ -535,7 +580,7 @@ function EventsPageInner() {
                     const key = dayKey(date);
                     const dayEvents = eventsByDay.get(key) || [];
                     const inMonth = isSameMonth(date, viewDate);
-                    const visibleEvents = dayEvents.slice(0, 3);
+                    const visibleEvents = expandedDay === key ? dayEvents : dayEvents.slice(0, 3);
                     const hiddenCount = Math.max(dayEvents.length - visibleEvents.length, 0);
 
                     return (
@@ -585,7 +630,7 @@ function EventsPageInner() {
                           {hiddenCount > 0 ? (
                             <button
                               type="button"
-                              onClick={() => setActiveEvent(dayEvents[0])}
+                              onClick={() => setExpandedDay(key)}
                               className="text-xs font-medium text-emerald-700 hover:text-emerald-800"
                             >
                               +{hiddenCount} more
@@ -663,9 +708,7 @@ function EventsPageInner() {
           <aside className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-slate-900">Upcoming this month</h3>
-              <p className="mt-1 text-sm text-slate-500">
-                Fast scan of the next loaded events.
-              </p>
+
             </div>
 
             <div className="space-y-3">
@@ -708,10 +751,17 @@ function EventsPageInner() {
                 ))
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-200 p-4 text-sm text-slate-500">
-                  No events found for this month and filter.
+                  No upcoming events match this month and filter.
                 </div>
               )}
             </div>
+            {featured.length > 0 && <section className="mt-7 border-t border-slate-200 pt-5">
+              <h3 className="text-lg font-semibold text-slate-900">Industry conferences to plan for</h3>
+              <ul className="mt-3 space-y-3">{featured.map(event => <li key={event.slug}>
+                <Link href={`/events/${event.slug}`} className="font-semibold text-emerald-700 hover:underline">{event.title}</Link>
+                <p className="text-sm text-slate-600">{displayDate(event.starts_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})} · {event.location}</p>
+              </li>)}</ul>
+            </section>}
           </aside>
         </div>
       </div>
